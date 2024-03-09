@@ -11,3 +11,4 @@ services:
     volumes:
       - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/nginx-proxy-manager:/data/'
       - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/nginx-proxy-manager:/letsencrypt/'
+      - - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/nginx-proxy-manager:/etc/letsencrypt/'
