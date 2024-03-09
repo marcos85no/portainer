@@ -9,7 +9,7 @@ services:
       - '443:443'
       - '81:81'
     environment:
-      - DB_SQLITE_FILE: "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/nginx-proxy-manager/data/database.sqlite"
+      DB_SQLITE_FILE: "/data/database.sqlite"
     volumes:
       - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/nginx-proxy-manager:/data/'
       - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/nginx-proxy-manager:/letsencrypt/'
