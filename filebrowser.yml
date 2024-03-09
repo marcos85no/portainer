@@ -1,11 +1,11 @@
 version: "3"
 services:
   filebrowser:
-    image: hurlenko/filebrowser
+    image: hurlenko/filebrowser:latest
     user: "${UID}:${GID}"
-    container_name: filebrowser-import-test
+    container_name: filebrowser
     ports:
-      - 4444:4444
+      - 8080:8080
     volumes:
       - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/:/data'
       - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/filebrowser/config/:/config'
