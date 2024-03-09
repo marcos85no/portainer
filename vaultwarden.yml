@@ -6,5 +6,5 @@ services:
     volumes:
       - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/vaultwarden:/data/'
     ports:
-      - '4000:80'
+      - '4000:4000'
     image: vaultwarden/server:latest
