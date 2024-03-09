@@ -3,7 +3,7 @@ services:
   filebrowser:
     image: hurlenko/filebrowser
     user: "${UID}:${GID}"
-    container_name: filebrowser
+    container_name: filebrowser-import-test
     ports:
       - 8080:8080
     volumes:
