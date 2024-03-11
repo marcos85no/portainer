@@ -2,7 +2,7 @@ version: "2.3"
 services:
   watchtower:
     container_name: watchtower
-    image: containrrr/watchtower:amd64-latest
+    image: containrrr/watchtower:latest
     restart: unless-stopped
     environment:
       - TZ=Europe/Paris
