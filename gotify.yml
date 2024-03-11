@@ -1,18 +1,29 @@
-version: "2"
+version: "3.8"
 services:
   gotify:
-    image: ghcr.io/gotify/server:latest
     container_name: gotify
+    restart: unless-stopped
+    image: gotify/server:latest
     ports:
-      - 4080:80
+      - ${port}:80
     environment:
-      - GOTIFY_DATABASE_DIALECT=sqlite3
-      - GOTIFY_DATABASE_CONNECTION=data/gotify.db
-      - GOTIFY_DEFAULTUSER_PASS=admin
-      - GOTIFY_DEFAULTUSER_NAME=admin
-      - GOTIFY_PASSSTRENGTH=10
-      - GOTIFY_UPLOADEDIMAGESDIR=data/images
-      - GOTIFY_PLUGINSDIR=data/plugins
-      - TZ=Europe/Paris
+      - GOTIFY_DEFAULTUSER_NAME=${username}
+      - GOTIFY_DEFAULTUSER_PASS=${password}
+      - TZ="Europe/Paris"
     volumes:
-      - /srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/gotify/data/:/app/data
+      - nfs_data:/app/data
+    networks:
+      - frontend
+      - backend
+volumes:
+  nfs_data:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=${address},rw,soft,nfsvers=4
+      device: ${path_nfs_data}
+networks:
+  backend:
+    external: true
+  frontend:
+    external: true
