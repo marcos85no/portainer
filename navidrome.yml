@@ -7,7 +7,7 @@ services:
       - "4533:4533"
     restart: unless-stopped
     environment:
-      ND_SCANSCHEDULE: 1h
+      ND_SCANSCHEDULE: 24h
     volumes:
       - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/navidrome/data/:/data'
       - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/musiques/musics/:/music/ro'
