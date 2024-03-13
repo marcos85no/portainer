@@ -1,8 +1,8 @@
 version: '3.3'
 services:
   vaultwarden:
-    image: vaultwarden/server:latest
     container_name: vaultwarden
+    image: vaultwarden/server:latest
     restart: unless-stopped
     labels:
       - com.centurylinklabs.watchtower.enable=true
@@ -10,4 +10,3 @@ services:
       - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/vaultwarden:/data/'
     ports:
       - '4000:80'
-  
