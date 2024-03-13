@@ -5,10 +5,8 @@ services:
     restart: unless-stopped
     image: gotify/server:latest
     ports:
-      - ${port}:80
+      - 4080:80
     environment:
-      - GOTIFY_DEFAULTUSER_NAME=${username}
-      - GOTIFY_DEFAULTUSER_PASS=${password}
       - TZ="Europe/Paris"
     volumes:
-      - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/gotify/data/:/app/data'
+      - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/gotify/data:/app/data gotify/server'
