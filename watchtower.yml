@@ -14,6 +14,6 @@ services:
       - WATCHTOWER_MONITOR_ONLY=true
       - WATCHTOWER_NOTIFICATIONS=gotify
       - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=""
-      - WATCHTOWER_NOTIFICATION_GOTIFY_URL="https://gotify.pariteau.fr"
+      - WATCHTOWER_NOTIFICATION_GOTIFY_URL=""
     volumes:
       - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/watchtower:/var/run/docker.sock'
