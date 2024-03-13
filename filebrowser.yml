@@ -1,14 +1,14 @@
-version: "3"
+version: '3'
 services:
   filebrowser:
-    image: hurlenko/filebrowser:latest
-    user: "${UID}:${GID}"
     container_name: filebrowser
-    ports:
-      - 8080:8080
-    volumes:
-      - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/:/data'
-      - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/filebrowser/config/:/config'
+    image: hurlenko/filebrowser:latest
+    restart: unless-stopped
+    user: "${UID}:${GID}"
     environment:
       - FB_BASEURL=/filebrowser
-    restart: unless-stopped
+    volumes:
+      - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153:/data'
+      - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/filebrowser/config:/config'
+    ports:
+      - 8080:8080
