@@ -1,12 +1,12 @@
-version: "3.8"
+version: '3.8'
 services:
   gotify:
     container_name: gotify
-    restart: unless-stopped
     image: gotify/server:latest
-    ports:
-      - 4080:80
+    restart: unless-stopped
     environment:
       - TZ="Europe/Paris"
     volumes:
       - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/gotify/data:/app/data gotify/server'
+    ports:
+      - 4080:80
