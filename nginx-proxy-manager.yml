@@ -1,7 +1,7 @@
 version: '3'
 services:
-  nginx-proxy-manager:
-    image: jc21/nginx-proxy-manager:latest
+  app:
+    image: 'jc21/nginx-proxy-manager:latest'
     container_name: nginx-proxy-manager
     restart: unless-stopped
     volumes:
