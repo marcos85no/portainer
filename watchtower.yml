@@ -10,5 +10,11 @@ services:
       - WATCHTOWER_LABEL_ENABLE=true
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_REMOVE_VOLUMES=true
+      - WATCHTOWER_LOG_LEVEL=info
+      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_MONITOR_ONLY=true
+      - WATCHTOWER_NOTIFICATIONS=gotify
+      - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${token}
+      - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${URL}
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
