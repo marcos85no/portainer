@@ -26,3 +26,5 @@ services:
       - 32413:32413/udp
       - 32414:32414/udp
       - 32469:32469/tcp
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
