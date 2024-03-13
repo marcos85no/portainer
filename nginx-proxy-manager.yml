@@ -12,5 +12,5 @@ services:
       - '80:80'
       - '443:443'
       - '81:81'
-    label:
+    labels:
       - com.centurylinklabs.watchtower.monitor-only=true
