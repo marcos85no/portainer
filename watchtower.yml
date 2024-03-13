@@ -1,4 +1,4 @@
-version: "2.3"
+version: '2.3'
 services:
   watchtower:
     container_name: watchtower
@@ -17,4 +17,4 @@ services:
       - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${token}
       - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${URL}
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/watchtower:/var/run/docker.sock'
