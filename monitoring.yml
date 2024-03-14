@@ -42,6 +42,8 @@ services:
       - monitoring
   grafana:
     image: grafana/grafana-oss:latest
+    container_name: grafana
+    restart: unless-stopped
     depends_on:
       - prometheus
     ports:
@@ -51,4 +53,3 @@ services:
       - /docker/grafana/provisioning:/etc/grafana/provisioning/
     networks:
       - monitoring
-    restart: unless-stopped
