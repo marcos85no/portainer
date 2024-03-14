@@ -5,7 +5,6 @@ networks:
 volumes:
   prometheus_data: {}
   grafana_data: {}
-  
 services:
   node-exporter:
     image: prom/node-exporter:latest
@@ -23,8 +22,7 @@ services:
     expose:
       - 9100
     networks:
-      - monitoring
-      
+      - monitoring 
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
@@ -42,8 +40,7 @@ services:
       - 9090
     networks:
       - monitoring
-      
-      grafana:
+  grafana:
     image: grafana/grafana:latest
     user: "admin"
     depends_on:
