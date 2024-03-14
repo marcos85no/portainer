@@ -42,7 +42,6 @@ services:
       - monitoring
   grafana:
     image: grafana/grafana-oss:latest
-    user: "admin"
     depends_on:
       - prometheus
     ports:
