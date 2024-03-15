@@ -9,4 +9,4 @@ services:
     ports:
       - '4000:80'
     labels:
-      - com.centurylinklabs.watchtower.enable=true
+      - com.centurylinklabs.watchtower.no-pull=true
