@@ -13,4 +13,4 @@ services:
     ports:
       - 4080:80
     labels:
-      - com.centurylinklabs.watchtower.monitor-only=true
+      - com.centurylinklabs.watchtower.enable=true
