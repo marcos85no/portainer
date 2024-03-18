@@ -26,8 +26,8 @@ services:
     restart: unless-stopped
     expose:
       - 9090
-    networks:
-      - monitor-net
+#    networks:
+#      - monitor-net
     labels:
       org.label-schema.group: "monitoring"
 
@@ -42,8 +42,8 @@ services:
     restart: unless-stopped
     expose:
       - 9093:9093
-    networks:
-      - monitor-net
+#    networks:
+#      - monitor-net
     labels:
       org.label-schema.group: "monitoring"
 
@@ -62,8 +62,8 @@ services:
     restart: unless-stopped
     expose:
       - 9100
-    networks:
-      - monitor-net
+#    networks:
+#      - monitor-net
     labels:
       org.label-schema.group: "monitoring"
 
@@ -82,8 +82,8 @@ services:
     restart: unless-stopped
     expose:
       - 7070
-    networks:
-      - monitor-net
+#    networks:
+#      - monitor-net
     labels:
       org.label-schema.group: "monitoring"
 
@@ -102,8 +102,9 @@ services:
     expose:
 #    ports:
 #      - 3000:3000
-    networks:
-      - monitor-net
+    - 3000
+#    networks:
+#      - monitor-net
     labels:
       org.label-schema.group: "monitoring"
 
@@ -113,8 +114,8 @@ services:
     restart: unless-stopped
     expose:
       - 9091
-    networks:
-      - monitor-net
+#    networks:
+#      - monitor-net
     labels:
       org.label-schema.group: "monitoring"
 
@@ -134,7 +135,7 @@ services:
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-$2a$14$1l.IozJx7xQRVmlkEQ32OeEEfP5mRxTpbDTCTcXRqn19gXD8YK1pO}
     restart: unless-stopped
-    networks:
-      - monitor-net
+#    networks:
+#      - monitor-net
     labels:
       org.label-schema.group: "monitoring"
