@@ -101,7 +101,7 @@ services:
     restart: unless-stopped
 #    expose:
     ports:
-      - 3000
+      - 3000:3000
 #    networks:
 #      - monitor-net
     labels:
