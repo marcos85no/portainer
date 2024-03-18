@@ -40,8 +40,9 @@ services:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/monitoring/alertmanager'
     restart: unless-stopped
-    expose:
-      - 9093
+#    expose:
+    ports:
+      - 9093:9093
     networks:
       - monitor-net
     labels:
