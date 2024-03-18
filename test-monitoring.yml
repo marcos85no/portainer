@@ -40,8 +40,7 @@ services:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
     restart: unless-stopped
-#    expose:
-    ports:
+    expose:
       - 9093:9093
     networks:
       - monitor-net
@@ -125,7 +124,7 @@ services:
       - "3000:3000"
       - "7070:7070"
       - "9090:9090"
-#      - "9093:9093"
+      - "9093:9093"
       - "9091:9091"
     volumes:
       - /srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/monitoring/caddy:/etc/caddy
