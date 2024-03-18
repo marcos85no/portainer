@@ -81,7 +81,7 @@ services:
       #- /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
     restart: unless-stopped
     expose:
-      - 8080
+      - 7070
     networks:
       - monitor-net
     labels:
@@ -122,7 +122,7 @@ services:
     container_name: caddy
     ports:
       - "3000:3000"
-      - "8080:8080"
+      - "7070:7070"
       - "9090:9090"
       - "9093:9093"
       - "9091:9091"
