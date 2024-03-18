@@ -1,8 +1,8 @@
 version: '2.1'
 
-networks:
-  monitor-net:
-    driver: bridge
+#networks:
+#  monitor-net:
+#    driver: bridge
 
 volumes:
     prometheus_data: {}
@@ -99,11 +99,11 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
       - GF_USERS_ALLOW_SIGN_UP=false
     restart: unless-stopped
-#    expose:
-    ports:
-      - 3000:3000
-#    networks:
-#      - monitor-net
+    expose:
+#    ports:
+#      - 3000:3000
+    networks:
+      - monitor-net
     labels:
       org.label-schema.group: "monitoring"
 
@@ -122,7 +122,7 @@ services:
     image: caddy:2.7.5
     container_name: caddy-test
     ports:
-#      - "3000:3000"
+      - "3000:3000"
       - "7070:7070"
       - "9090:9090"
       - "9093:9093"
