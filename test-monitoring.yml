@@ -4,7 +4,7 @@ services:
 
   prometheus:
     image: prom/prometheus:latest
-    container_name: prometheus
+    container_name: prometheus-test
     deploy:
       replicas: 1
     volumes:
@@ -19,7 +19,7 @@ services:
 
   alertmanager:
     image: prom/alertmanager:latest
-    container_name: alertmanager
+    container_name: alertmanager-test
     deploy:
       replicas: 1
     volumes:
@@ -31,7 +31,7 @@ services:
 
   grafana:
     image: grafana/grafana:latest
-    container_name: grafana
+    container_name: grafana-test
     environment:
       - GF_PATHS_CONFIG=/etc/grafana/grafana.ini
     deploy:
@@ -48,7 +48,7 @@ services:
 
   blackbox:
     image: prom/blackbox-exporter:latest
-    container_name: blackbox_exporter
+    container_name: blackbox_exporter-test
     deploy:
       replicas: 1
     volumes:
@@ -57,7 +57,7 @@ services:
 
   node_exporter:
     image: prom/node-exporter:latest
-    container_name: node_exporter
+    container_name: node_exporter-test
     deploy:
       replicas: 1
     network_mode: "host"
