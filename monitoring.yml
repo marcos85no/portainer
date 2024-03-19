@@ -6,7 +6,7 @@ services:
     image: prom/prometheus:latest
     container_name: prometheus
     volumes:
-      - /docker/monitoring/prometheus-data:/prometheus
+      - prometheus-data:/prometheus
       - /docker/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - /docker/monitoring/alertmanager/alert.rules/alerts.rules.yml:/alertmanager/alert.rules/alerts.rules.yml
     command:
