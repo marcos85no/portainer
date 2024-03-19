@@ -11,6 +11,6 @@ services:
       - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153:/data'
       - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/filebrowser/config:/config'
     ports:
-      - 1000:1000
+      - 1000:8080
     labels:
       - com.centurylinklabs.watchtower.enable=true
