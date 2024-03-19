@@ -26,6 +26,8 @@ services:
       - /docker/monitoring/grafana/grafana_data:/var/lib/grafana
       - /docker/monitoring/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - /docker/monitoring/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+    volumes:
+      grafana-storage: {}
     environment:
       - GF_SECURITY_ADMIN_USER=${GRAFANA_USER}
       - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
