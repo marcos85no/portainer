@@ -1,9 +1,9 @@
 version: '3'
 
 volumes:
-  prometheus-data:
-  grafana-data:
-  alertmanager-data:
+    prometheus_data: {}
+    grafana_data: {}
+    alertmanager_data: {]
 
 networks:
   monitor-net:
@@ -33,6 +33,7 @@ services:
     container_name: alertmanager
     volumes:
       - ./alertmanager:/etc/alertmanager
+      - alertmanager_data:/alertmanager
     command:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
