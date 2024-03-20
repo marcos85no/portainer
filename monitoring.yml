@@ -5,15 +5,18 @@ volumes:
   grafana-data:
   alertmanager-data:
 
+networks:
+  monitor-net:
+    driver: bridge
+    
 services:
 
   prometheus:
+    image: prom/prometheus:v2.50.1
     container_name: prometheus
-    image: prom/prometheus:latest
-    restart: unless-stopped
     volumes:
-      - prometheus-data:/prometheus
       - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -21,34 +24,31 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
-    network_mode: "host"
+    restart: unless-stopped
+    networks:
+      - monitor-net
 
   alertmanager:
+    image: prom/alertmanager:v0.27.0
     container_name: alertmanager
-    image: prom/alertmanager:latest
-    restart: unless-stopped
     volumes:
-      - alertmanager-data:/alertmanager
-      - /docker/monitoring/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
-      - /docker/monitoring/alertmanager/templates/default.tmpl:/etc/alertmanager/templates/default.tmpl
+      - ./alertmanager:/etc/alertmanager
     command:
-      - '--config.file=/etc/alertmanager/alertmanager.yml'
-    network_mode: "host"
+      - '--config.file=/etc/alertmanager/config.yml'
+      - '--storage.path=/alertmanager'
+    restart: unless-stopped
+    networks:
+      - monitor-net
 
   grafana:
+    image: grafana/grafana:10.4.0
     container_name: grafana
-    image: grafana/grafana:latest
-    restart: unless-stopped
-#    environment:
-#      - GF_PATHS_CONFIG=/etc/grafana/grafana.ini
-    depends_on:
-      - prometheus
     volumes:
-      - grafana-data:/var/lib/grafana
+      - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
-#      - /docker/monitoring/grafana/grafana.ini:/etc/grafana/grafana.ini
-    network_mode: "host"
+    networks:
+      - monitor-net
 
   blackbox:
     container_name: blackbox_exporter
@@ -56,15 +56,21 @@ services:
     restart: unless-stopped
     volumes:
     - /docker/monitoring/blackbox:/config
-    network_mode: "host"
+    networks:
+      - monitor-net
 
-  node_exporter:
-    container_name: node_exporter
-    image: prom/node-exporter:latest
-    restart: unless-stopped
-    network_mode: "host"
+  nodeexporter:
+    image: prom/node-exporter:v1.7.0
+    container_name: nodeexporter
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
     command:
       - '--path.procfs=/host/proc'
       - '--path.rootfs=/rootfs'
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    restart: unless-stopped
+    networks:
+      - monitor-net
