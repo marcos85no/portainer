@@ -12,8 +12,8 @@ services:
     image: prom/prometheus:latest
     restart: unless-stopped
     volumes:
+      - prometheus-data:/prometheus
       - ./prometheus:/etc/prometheus
-      - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
