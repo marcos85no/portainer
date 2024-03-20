@@ -1,10 +1,16 @@
 version: '3'
 
+volumes:
+  prometheus-data:
+  grafana-data:
+  alertmanager-data:
+
 services:
 
   prometheus:
-    image: prom/prometheus:latest
     container_name: prometheus
+    image: prom/prometheus:latest
+    restart: unless-stopped
     volumes:
       - prometheus-data:/prometheus
       - /docker/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -16,8 +22,9 @@ services:
     network_mode: "host"
 
   alertmanager:
-    image: prom/alertmanager:latest
     container_name: alertmanager
+    image: prom/alertmanager:latest
+    restart: unless-stopped
     volumes:
       - alertmanager-data:/alertmanager
       - /docker/monitoring/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
@@ -27,33 +34,30 @@ services:
     network_mode: "host"
 
   grafana:
-    image: grafana/grafana:latest
     container_name: grafana
-    environment:
-      - GF_PATHS_CONFIG=/etc/grafana/grafana.ini
+    image: grafana/grafana:latest
+    restart: unless-stopped
+#    environment:
+#      - GF_PATHS_CONFIG=/etc/grafana/grafana.ini
     depends_on:
       - prometheus
     volumes:
       - grafana-data:/var/lib/grafana
-      - /docker/monitoring/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
-      - /docker/monitoring/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
-      - /docker/monitoring/grafana/grafana.ini:/etc/grafana/grafana.ini
-      - /docker/monitoring/grafana/dashboards:/var/lib/grafana/dashboards
+      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+#      - /docker/monitoring/grafana/grafana.ini:/etc/grafana/grafana.ini
     network_mode: "host"
 
   blackbox:
-    image: prom/blackbox-exporter:latest
     container_name: blackbox_exporter
+    image: prom/blackbox-exporter:latest
+    restart: unless-stopped
     volumes:
     - /docker/monitoring/blackbox:/config
     network_mode: "host"
 
   node_exporter:
-    image: prom/node-exporter:latest
     container_name: node_exporter
+    image: prom/node-exporter:latest
+    restart: unless-stopped
     network_mode: "host"
-
-volumes:
-  prometheus-data:
-  grafana-data:
-  alertmanager-data:
