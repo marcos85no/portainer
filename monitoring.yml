@@ -1,6 +1,6 @@
 version: "3.8"
 volumes:
-#  grafana_storage: {}
+  grafana_storage: {}
   prometheus-data: {}
 services:
   grafana:
@@ -14,8 +14,9 @@ services:
     ports:
      - '3000:3000'
     volumes:
-#      - 'grafana_storage:/var/lib/grafana'
-      - '/docker/monitoring/grafana:/var/lib/grafana'
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
@@ -30,9 +31,8 @@ services:
     ports:
       - '9090:9090'
     volumes:
-      - '/docker/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml'
-#      - '/docker/monitoring/prometheus:/prometheus'
-      - prometheus-data:/prometheus
+      - ./prometheus:/etc/prometheus
+      - prometheus_data:/prometheus
   nodeexporter:
     image: quay.io/prometheus/node-exporter:latest
     container_name: nodeexporter
