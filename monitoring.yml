@@ -32,7 +32,8 @@ services:
     ports:
       - '9090:9090'
     volumes:
-      - '/docker/monitoring/prometheus/config:/etc/prometheus'
+      - /docker/monitoring/prometheus/config:/etc/prometheus
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
 #      - ./prometheus:/etc/prometheus
 #      - prometheus_data:/prometheus
   nodeexporter:
