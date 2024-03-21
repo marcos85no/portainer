@@ -21,6 +21,7 @@ services:
       - 9090:9090
     restart: unless-stopped
     volumes:
+      - '/docker/monitoring/prometheus:/prometheus.yml'
       - ./prometheus:/etc/prometheus
       - prom_data:/prometheus
   volumes:
