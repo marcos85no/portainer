@@ -10,20 +10,15 @@ services:
     ports:
      - '3000:3000'
     volumes:
-     - 'grafana_storage:/var/lib/grafana'
+     - '/docker/monitoring/grafana:/var/lib/grafana'
   
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
+        restart: unless-stopped
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
       - 9090:9090
-    restart: unless-stopped
     volumes:
-      - '/docker/monitoring/prometheus:/prometheus.yml'
-      - ./prometheus:/etc/prometheus
-      - prom_data:/prometheus
-  volumes:
-  grafana_storage: {}
-  prom_data: {}
+      - '/docker/monitoring/prometheus:/etc/prometheus'
