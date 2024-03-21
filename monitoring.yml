@@ -14,7 +14,7 @@ services:
     ports:
      - '3000:3000'
     volumes:
-      - /docker/monitoring/grafana:/var/lib/grafana
+      - '/docker/monitoring/grafana:/var/lib/grafana'
 #      - grafana_data:/var/lib/grafana
 #      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
 #      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
@@ -32,7 +32,7 @@ services:
     ports:
       - '9090:9090'
     volumes:
-      - /docker/monitoring/prometheus/config:/etc/prometheus
+      - '/docker/monitoring/prometheus/config:/etc/prometheus'
 #      - ./prometheus:/etc/prometheus
 #      - prometheus_data:/prometheus
   nodeexporter:
