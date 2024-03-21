@@ -14,4 +14,4 @@ services:
     restart: unless-stopped
     labels:
       - com.centurylinklabs.watchtower.enable=true
-      - org.label-schema.group='app'
+      org.label-schema.group: "app"
