@@ -15,7 +15,7 @@ services:
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
-        restart: unless-stopped
+    restart: unless-stopped
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
     ports:
