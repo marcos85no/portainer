@@ -13,4 +13,4 @@ services:
       - FB_BASEURL=/filebrowser
     restart: unless-stopped
     labels:
-      org.label-schema.group: "nas"
+      org.label-schema.group: "app"
