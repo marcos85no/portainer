@@ -26,8 +26,8 @@ services:
       - '9090:9090'
     volumes:
       - '/docker/monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml'
-      - '/docker/monitoring/prometheus:/prometheus'
-#      - prometheus-data:/prometheus
+#      - '/docker/monitoring/prometheus:/prometheus'
+      - prometheus-data:/prometheus
   node_exporter:
     image: quay.io/prometheus/node-exporter:latest
     container_name: node_exporter-test
