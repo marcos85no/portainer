@@ -1,4 +1,6 @@
 version: "3.8"
+volumes:
+  grafana_storage: {}
 services:
   grafana:
     image: grafana/grafana-enterprise
@@ -11,8 +13,6 @@ services:
      - '3000:3000'
     volumes:
       - 'grafana_storage:/var/lib/grafana'
-volumes:
-  grafana_storage: {}
   
   prometheus:
     image: prom/prometheus:latest
