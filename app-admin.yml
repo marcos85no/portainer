@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app"
+      - "org.label-schema.group=app-admin"
 
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:latest
@@ -40,7 +40,7 @@ services:
       - net
     labels:
       - "com.centurylinklabs.watchtower.monitor-only=true"
-      - "org.label-schema.group=app"
+      - "org.label-schema.group=app-admin"
 
   vaultwarden:
     container_name: vaultwarden
@@ -54,7 +54,7 @@ services:
       - net
     labels:
       - "com.centurylinklabs.watchtower.no-pull=true"
-      - "org.label-schema.group=app"
+      - "org.label-schema.group=app-admin"
 
   watchtower:
     container_name: watchtower
@@ -85,4 +85,4 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     labels:
-      - "org.label-schema.group=app"
+      - "org.label-schema.group=app-admin"
