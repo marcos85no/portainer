@@ -85,4 +85,4 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     labels:
-      - "org.label-schema.group=app-admin"
+#      - "org.label-schema.group=app-admin"
