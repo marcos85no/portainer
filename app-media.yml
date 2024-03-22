@@ -32,7 +32,7 @@ services:
       - PGID=0
       - TZ=EUROPE/Paris
       - VERSION=docker
-      - CLAIM_PLEX=${CLAIM}
+      - PLEX_CLAIM=${CLAIM_PLEX}
       - HOSTNAME=PlexServer
     volumes:
       - "/docker/plexserver/config:/config"
