@@ -6,7 +6,7 @@ networks:
 
 services:
 
-    navidrome:
+  navidrome:
     image: deluan/navidrome:latest
     container_name: navidrome
     ports:
@@ -23,7 +23,7 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
-    plex:
+  plex:
     container_name: plex
     image: plexinc/pms-docker:latest
     restart: unless-stopped
