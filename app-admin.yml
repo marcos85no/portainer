@@ -23,19 +23,6 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
 
-  vaultwarden:
-    container_name: vaultwarden
-    image: vaultwarden/server:latest
-    restart: unless-stopped
-    volumes:
-      - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/vaultwarden:/data/"
-    ports:
-      - 4000:80
-    networks:
-      - net
-    labels:
-      - "com.centurylinklabs.watchtower.no-pull=true"
-
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:latest
     container_name: nginx-proxy-manager
@@ -53,7 +40,20 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.monitor-only=true"
 
-    watchtower:
+  vaultwarden:
+    container_name: vaultwarden
+    image: vaultwarden/server:latest
+    restart: unless-stopped
+    volumes:
+      - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/vaultwarden:/data/"
+    ports:
+      - 4000:80
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.no-pull=true"
+
+  watchtower:
     container_name: watchtower
     image: containrrr/watchtower:latest
     restart: unless-stopped
