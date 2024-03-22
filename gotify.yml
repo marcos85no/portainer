@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 services:
   gotify:
     container_name: gotify
@@ -9,9 +9,8 @@ services:
       - GOTIFY_DEFAULTUSER_NAME=${username}
       - GOTIFY_DEFAULTUSER_PASS=${password}
     volumes:
-      - '/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/gotify/data:/app/data gotify/server'
+      - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/gotify/data:/app/data gotify/server"
     ports:
       - 4080:80
     labels:
-      - com.centurylinklabs.watchtower.enable=true
-      org.label-schema.group: "app"
+      - "com.centurylinklabs.watchtower.enable=true"
