@@ -1,7 +1,7 @@
 version: "3.8"
 
 networks:
-  app-net:
+  net:
     driver: bridge
 
 services:
@@ -12,7 +12,7 @@ services:
     ports:
       - 4533:4533
     networks:
-      - app-net
+      - net
     restart: unless-stopped
     environment:
       - ND_SCANSCHEDULE=24h
@@ -49,6 +49,6 @@ services:
       - 32414:32414/udp
       - 32469:32469/tcp
     networks:
-      - app-net
+      - net
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
