@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 services:
   filebrowser:
     image: hurlenko/filebrowser
@@ -13,5 +13,5 @@ services:
       - FB_BASEURL=/filebrowser
     restart: unless-stopped
     labels:
-      - com.centurylinklabs.watchtower.enable=true
-      - org.label-schema.group:${TAG}
+      com.centurylinklabs.watchtower.enable: "true"
+      org.label-schema.group: "${TAG}"
