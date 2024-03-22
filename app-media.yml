@@ -22,7 +22,7 @@ services:
       - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/musiques/musics:/music"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app"
+      - "org.label-schema.group=app-media"
 
   plex:
     container_name: plex
@@ -53,4 +53,4 @@ services:
       - net
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app"
+      - "org.label-schema.group=app-media"
