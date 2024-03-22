@@ -13,5 +13,4 @@ services:
       - FB_BASEURL=/filebrowser
     restart: unless-stopped
     labels:
-      com.centurylinklabs.watchtower.enable: "true"
-      org.label-schema.group: "app"
+      - "com.centurylinklabs.watchtower.enable=true"
