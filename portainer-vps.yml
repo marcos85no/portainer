@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  portainer:
+    container_name: portainer-vps
+    image: portainer/portainer-ce:latest
+    restart: unless-stopped
+    volumes:
+      - "/docker/portainer:/data"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    ports:
+      - 8000:8000
+      - 9000:9000
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+      - "org.label-schema.group=vps"
