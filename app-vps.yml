@@ -6,7 +6,7 @@ networks:
     
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:latest
-    container_name: nginx-proxy-manager
+    container_name: nginx-proxy-manager-vps
     restart: unless-stopped
     volumes:
       - "/docker/nginx-proxy-manager/data:/data/"
@@ -23,7 +23,7 @@ networks:
       - "org.label-schema.group=app-vps"
 
   vaultwarden:
-    container_name: vaultwarden
+    container_name: vaultwarden-vps
     image: vaultwarden/server:latest
     restart: unless-stopped
     volumes:
@@ -36,11 +36,11 @@ networks:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-vps"
 
-    watchtower:
-    container_name: watchtower
+  watchtower:
+    container_name: watchtower-vps
     image: containrrr/watchtower:latest
     restart: unless-stopped
-    environment:
+     environment:
       - TZ=Europe/Paris
       - WATCHTOWER_SCHEDULE= 0 0 3 * * *
       - WATCHTOWER_CLEANUP=true
