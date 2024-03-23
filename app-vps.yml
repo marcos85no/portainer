@@ -40,7 +40,7 @@ networks:
     container_name: watchtower-vps
     image: containrrr/watchtower:latest
     restart: unless-stopped
-     environment:
+    environment:
       - TZ=Europe/Paris
       - WATCHTOWER_SCHEDULE= 0 0 3 * * *
       - WATCHTOWER_CLEANUP=true
