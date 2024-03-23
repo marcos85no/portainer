@@ -19,7 +19,7 @@ networks:
     networks:
       - net
     labels:
-      - "com.centurylinklabs.watchtower.monitor-only=true"
+      - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-vps"
 
   vaultwarden:
@@ -33,7 +33,7 @@ networks:
     networks:
       - net
     labels:
-      - "com.centurylinklabs.watchtower.no-pull=true"
+      - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-vps"
 
     watchtower:
