@@ -8,7 +8,7 @@ services:
 
   filebrowser:
     image: hurlenko/filebrowser
-    user: "${UID}:${GID}"
+#    user: "${UID}:${GID}"
     container_name: filebrowser
     ports:
       - 1000:1000
