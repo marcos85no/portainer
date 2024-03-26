@@ -3,8 +3,6 @@ version: "3.8"
 networks:
   net:
     driver: bridge
-  monitoring_net:
-    external: true
 
 services:
 
@@ -14,10 +12,8 @@ services:
     container_name: filebrowser
     ports:
       - 1000:1000
-    expose:
-      - 1000
     networks:
-      - monitoring_net
+      - net
     volumes:
       - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/:/data"
       - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/filebrowser/config/:/config"
