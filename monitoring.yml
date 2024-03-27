@@ -18,7 +18,7 @@ services:
  #     - ./prometheus:/etc/prometheus
  #     - prometheus_data:/prometheus
        - /docker/monitoring/prometheus:/etc/prometheus
- #      - /docker/monitoring/prometheus:/prometheus
+       - /docker/monitoring/prometheus:/prometheus
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
       - "--storage.tsdb.path=/prometheus"
@@ -41,6 +41,7 @@ services:
 #      - ./alertmanager:/etc/alertmanager
 #      - alertmanager_data:/alertmanager
       - /docker/monitoring/alertmanager:/etc/alertmanager
+      - /docker/monitoring/alertmanager:/alertmanager
     command:
       - "--config.file=/etc/alertmanager/config.yml"
       - "--storage.path=/alertmanager"
