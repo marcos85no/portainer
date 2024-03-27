@@ -18,6 +18,7 @@ services:
  #     - ./prometheus:/etc/prometheus
  #     - prometheus_data:/prometheus
        - /docker/monitoring/prometheus:/etc/prometheus
+ #      - /docker/monitoring/prometheus:/prometheus
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
       - "--storage.tsdb.path=/prometheus"
