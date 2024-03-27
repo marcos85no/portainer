@@ -99,6 +99,7 @@ services:
 #      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
       - /docker/monitoring/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
       - /docker/monitoring/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - /docker/monitoring/alertmanager:/alertmanager
     restart: unless-stopped
     expose:
       - 3000
