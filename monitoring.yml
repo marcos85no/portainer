@@ -4,7 +4,7 @@ networks:
   net:
     driver: bridge
 
-volumes:
+#volumes:
 #    prometheus_data: {}
 #    grafana_data: {}
 #    alertmanager_data: {}
