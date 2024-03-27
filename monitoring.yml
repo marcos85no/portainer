@@ -1,51 +1,140 @@
 version: "3.8"
-volumes:
-#  grafana_data: {}
-  prometheus_data: {}
+
+networks:
+  net:
+    driver: bridge
+
+#volumes:
+#    prometheus_data: {}
+#    grafana_data: {}
+#    alertmanager_data: {}
+
 services:
-  grafana:
-    image: grafana/grafana-enterprise
-    container_name: grafana
-    restart: unless-stopped
-    user: '0'
-    environment:
-     - GF_SERVER_ROOT_URL=http://sup.pariteau.fr/
-     - GF_INSTALL_PLUGINS=grafana-clock-panel
-    ports:
-     - '3000:3000'
-    volumes:
-      - '/docker/monitoring/grafana:/var/lib/grafana'
-#      - grafana_data:/var/lib/grafana
-#      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
-#      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
-    restart: unless-stopped
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.path=/prometheus'
-      - '--web.console.libraries=/etc/prometheus/console_libraries'
-      - '--web.console.templates=/etc/prometheus/consoles'
-      - '--storage.tsdb.retention.time=200h'
-      - '--web.enable-lifecycle'
-    ports:
-      - '9090:9090'
     volumes:
-      - /docker/monitoring/prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml
-      - ./prometheus:/etc/prometheus
-      - prometheus_data:/prometheus
-  nodeexporter:
-    image: quay.io/prometheus/node-exporter:latest
-    container_name: nodeexporter
-    restart: unless-stopped
+ #     - ./prometheus:/etc/prometheus
+ #     - prometheus_data:/prometheus
+       - /docker/monitoring/prometheus:/etc/prometheus
     command:
-      - '--path.procfs=/host/proc'
-      - '--path.rootfs=/rootfs'
-      - '--path.sysfs=/host/sys'
-      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
-    ports:
-      - '9100:9100'
-    pid: host
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/etc/prometheus/console_libraries"
+      - "--web.console.templates=/etc/prometheus/consoles"
+      - "--storage.tsdb.retention.time=200h"
+      - "--web.enable-lifecycle"
+    restart: unless-stopped
+    expose:
+      - 9090
+    networks:
+      - net
+    labels:
+      - "org.label-schema.group=monitoring"
+
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: alertmanager
     volumes:
-      - '/:/host:ro,rslave'
+#      - ./alertmanager:/etc/alertmanager
+#      - alertmanager_data:/alertmanager
+      - /docker/monitoring/alertmanager:/etc/alertmanager
+    command:
+      - "--config.file=/etc/alertmanager/config.yml"
+      - "--storage.path=/alertmanager"
+    restart: unless-stopped
+    expose:
+      - 9093
+    networks:
+      - net
+    labels:
+      - "org.label-schema.group=monitoring"
+
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - "--path.procfs=/host/proc"
+      - "--path.rootfs=/rootfs"
+      - "--path.sysfs=/host/sys"
+      - "--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)"
+    restart: unless-stopped
+    expose:
+      - 9100
+    networks:
+      - net
+    labels:
+      - "org.label-schema.group=monitoring"
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:latest
+    container_name: cadvisor
+    privileged: true
+    devices:
+      - /dev/kmsg:/dev/kmsg
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker:/var/lib/docker:ro
+    restart: unless-stopped
+    expose:
+      - 8080
+    networks:
+      - net
+    labels:
+      - "org.label-schema.group=monitoring"
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    volumes:
+#      - grafana_data:/var/lib/grafana
+#      - ./grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+#      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - /docker/monitoring/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - /docker/monitoring/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+    restart: unless-stopped
+    expose:
+      - 3000
+    networks:
+      - net
+    labels:
+      - "org.label-schema.group=monitoring"
+
+  pushgateway:
+    image: prom/pushgateway:latest
+    container_name: pushgateway
+    restart: unless-stopped
+    expose:
+      - 9091
+    networks:
+      - net
+    labels:
+      - "org.label-schema.group=monitoring"
+      
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    ports:
+      - 3000:3000
+      - 8080:8080
+      - 9090:9090
+      - 9093:9093
+      - 9091:9091
+    volumes:
+      - ./caddy:/etc/caddy
+    environment:
+      - ADMIN_USER=${ADMIN_USER:-admin}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - ADMIN_PASSWORD_HASH=${ADMIN_PASSWORD_HASH:-$2a$14$1l.IozJx7xQRVmlkEQ32OeEEfP5mRxTpbDTCTcXRqn19gXD8YK1pO}
+    restart: unless-stopped
+    networks:
+      - net
+    labels:
+      - "org.label-schema.group=monitoring"
