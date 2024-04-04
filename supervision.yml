@@ -7,7 +7,7 @@ networks:
 volumes:
   prometheus-data: {}
   grafana-data: {}
-  alertmanager-data: {}
+#  alertmanager-data: {}
 
 services:
 
@@ -40,7 +40,8 @@ services:
     container_name: alertmanager
     restart: unless-stopped
     volumes:
-      - alertmanager-data:/alertmanager
+#      - alertmanager-data:/alertmanager
+      - /docker/supervision/alertmanager/data:/alertmanager
       - /docker/supervision/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
       - /docker/supervision/alertmanager/templates/default.tmpl:/etc/alertmanager/templates/default.tmpl
     command:
