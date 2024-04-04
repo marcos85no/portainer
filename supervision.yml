@@ -17,6 +17,7 @@ services:
     restart: unless-stopped
     volumes:
 #      - prometheus-data:/prometheus
+      - /docker/supervision/prometheus:/prometheus
       - /docker/supervision/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - /docker/supervision/alertmanager/alert.rules/alerts.rules.yml:/alertmanager/alert.rules/alerts.rules.yml
     command:
