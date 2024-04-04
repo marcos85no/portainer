@@ -4,10 +4,10 @@ networks:
   net:
     driver: bridge
 
-volumes:
-  prometheus-data: {}
-  grafana-data: {}
-  alertmanager-data: {}
+#volumes:
+#  prometheus-data: {}
+#  grafana-data: {}
+#  alertmanager-data: {}
 
 services:
 
@@ -16,12 +16,12 @@ services:
     container_name: prometheus
     restart: unless-stopped
     volumes:
-      - prometheus-data:/prometheus
+#      - prometheus-data:/prometheus
       - /docker/supervision/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - /docker/supervision/alertmanager/alert.rules/alerts.rules.yml:/alertmanager/alert.rules/alerts.rules.yml
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
-#      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.path=/prometheus'
       - '--web.console.libraries=/etc/prometheus/console_libraries'
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention.time=240h'
@@ -40,7 +40,8 @@ services:
     container_name: alertmanager
     restart: unless-stopped
     volumes:
-      - alertmanager-data:/alertmanager
+#      - alertmanager-data:/alertmanager
+      - /docker/supervision/alertmanager/data:/alertmanager
       - /docker/supervision/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
       - /docker/supervision/alertmanager/templates/default.tmpl:/etc/alertmanager/templates/default.tmpl
     command:
@@ -60,7 +61,7 @@ services:
       - GF_PATHS_CONFIG=/etc/grafana/grafana.ini
     restart: unless-stopped
     volumes:
-      - grafana-data:/var/lib/grafana
+ #     - grafana-data:/var/lib/grafana
       - /docker/supervision/grafana/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
       - /docker/supervision/grafana/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
       - /docker/supervision/grafana/grafana.ini:/etc/grafana/grafana.ini
