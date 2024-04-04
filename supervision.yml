@@ -27,6 +27,7 @@ services:
       - net
     labels:
       - "org.label-schema.group=monitoring"
+      - "com.centurylinklabs.watchtower.enable=true"
 
   alertmanager:
     image: prom/alertmanager:latest
@@ -37,11 +38,12 @@ services:
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
     expose:
-      - 9090
+      - 9093
     networks:
       - net
     labels:
       - "org.label-schema.group=monitoring"
+      - "com.centurylinklabs.watchtower.enable=true"
 
   grafana:
     image: grafana/grafana:latest
@@ -57,11 +59,12 @@ services:
       - ./grafana/grafana.ini:/etc/grafana/grafana.ini
       - ./grafana/dashboards:/var/lib/grafana/dashboards
     expose:
-      - 9090
+      - 3000
     networks:
       - net
     labels:
       - "org.label-schema.group=monitoring"
+      - "com.centurylinklabs.watchtower.enable=true"
 
   blackbox:
     image: prom/blackbox-exporter:latest
@@ -69,21 +72,23 @@ services:
     volumes:
     - ./blackbox:/config
     expose:
-      - 9090
+      - 3030
     networks:
       - net
     labels:
       - "org.label-schema.group=monitoring"
+      - "com.centurylinklabs.watchtower.enable=true"
 
   node_exporter:
     image: prom/node-exporter:latest
     container_name: node_exporter
     expose:
-      - 9090
+      - 9100
     networks:
       - net
     labels:
       - "org.label-schema.group=monitoring"
+      - "com.centurylinklabs.watchtower.enable=true"
 
   cadvisor:
     image: gcr.io/cadvisor/cadvisor:latest
@@ -103,6 +108,7 @@ services:
       - net
     labels:
       - "org.label-schema.group=monitoring"
+      - "com.centurylinklabs.watchtower.enable=true"
 
   pushgateway:
     image: prom/pushgateway:latest
@@ -114,6 +120,7 @@ services:
       - net
     labels:
       - "org.label-schema.group=monitoring"
+      - "com.centurylinklabs.watchtower.enable=true"
 
   caddy:
     image: caddy:latest
@@ -124,8 +131,9 @@ services:
       - 9090:9090
       - 9093:9093
       - 9091:9091
+      - 3030:3030
     volumes:
-      - /docker/monitoring/caddy:/etc/caddy
+      - ./caddy:/etc/caddy
 #    environment:
 #      - ADMIN_USER=${ADMIN_USER:-admin}
 #      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
@@ -135,3 +143,4 @@ services:
       - net
     labels:
       - "org.label-schema.group=monitoring"
+      - "com.centurylinklabs.watchtower.enable=true"
