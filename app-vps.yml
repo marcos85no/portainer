@@ -5,24 +5,6 @@ networks:
     driver: bridge
 
 services:
-    
-  nginx-proxy-manager:
-    image: jc21/nginx-proxy-manager:latest
-    container_name: nginx-proxy-manager-vps
-    restart: unless-stopped
-    volumes:
-      - "/docker/nginx-proxy-manager/data:/data/"
-      - "/docker/nginx-proxy-manager/data:/letsencrypt/"
-      - "/docker/nginx-proxy-manager/data:/etc/letsencrypt/"
-    ports:
-      - 80:80
-      - 443:443
-      - 81:81
-    networks:
-      - net
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app-vps"
 
   vaultwarden:
     container_name: vaultwarden-vps
@@ -51,10 +33,6 @@ services:
       - WATCHTOWER_LABEL_ENABLE=true
       - WATCHTOWER_MONITOR_ONLY=true
       - WATCHTOWER_NO_PULL=true
-      
-#      - WATCHTOWER_NOTIFICATIONS=gotify
-#      - WATCHTOWER_NOTIFICATION_GOTIFY_TOKEN=${token}
-#      - WATCHTOWER_NOTIFICATION_GOTIFY_URL=${url}
 
 #      - WATCHTOWER_NOTIFICATIONS=email
 #      - WATCHTOWER_NOTIFICATION_EMAIL_FROM=${EMAILURLFROM}
