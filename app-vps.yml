@@ -38,7 +38,7 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-vps"
 
-  watchtower:
+    watchtower:
     container_name: watchtower-vps
     image: containrrr/watchtower:latest
     restart: unless-stopped
@@ -75,7 +75,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     labels:
       - "org.label-schema.group=app-vps"
-      
+
   node-exporter:
     image: prom/node-exporter:latest
     container_name: node-exporter-vps
