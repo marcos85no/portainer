@@ -20,7 +20,7 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-vps"
 
-    watchtower:
+  watchtower:
     container_name: watchtower-vps
     image: containrrr/watchtower:latest
     restart: unless-stopped
@@ -28,7 +28,6 @@ services:
       - TZ=Europe/Paris
       - WATCHTOWER_SCHEDULE= 0 0 3 * * *
       - WATCHTOWER_CLEANUP=true
-#      - WATCHTOWER_REMOVE_VOLUMES=true
       - WATCHTOWER_LOG_LEVEL=info
       - WATCHTOWER_LABEL_ENABLE=true
       - WATCHTOWER_MONITOR_ONLY=true
