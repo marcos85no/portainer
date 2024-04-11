@@ -25,7 +25,7 @@ services:
       - "org.label-schema.group=app-vps"
 
   db:
-    image: mysql:latest
+    image: mysql:5.7
     container_name: wordpress-db-vps
     restart: unless-stopped
     environment:
