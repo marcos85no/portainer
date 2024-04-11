@@ -1,0 +1,25 @@
+version: "3.8"
+
+networks:
+  net:
+    driver: bridge
+
+services:
+    
+  nginx-proxy-manager:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager-vps
+    restart: unless-stopped
+    volumes:
+      - "/docker/nginx-proxy-manager/data:/data/"
+      - "/docker/nginx-proxy-manager/data:/letsencrypt/"
+      - "/docker/nginx-proxy-manager/data:/etc/letsencrypt/"
+    ports:
+      - 80:80
+      - 443:443
+      - 81:81
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-vps"
