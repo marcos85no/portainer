@@ -1,0 +1,63 @@
+version: "3.8"
+
+networks:
+  net:
+    driver: bridge
+
+services:
+    
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress-vps
+    restart: unless-stopped
+    environment:
+      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+    volumes:
+      - "/docker/nginx-proxy-manager/data:/var/www/html"
+    ports:
+      - 3000:80
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-vps"
+
+  db:
+    image: mysql:latest
+    container_name: wordpress-db-vps
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - "/docker/mysql/db_data:/var/lib/mysql"
+    ports:
+      - 3000:80
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-vps"
+
+  pma:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: wordpress-pma-vps
+    restart: unless-stopped
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - "/docker/mysql/db_data:/var/lib/mysql"
+    ports:
+      - 3001:80
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-vps"
