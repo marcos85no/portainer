@@ -35,8 +35,6 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
       - "/docker/mysql/db_data:/var/lib/mysql"
-    ports:
-      - 3000:80
     networks:
       - net
     labels:
