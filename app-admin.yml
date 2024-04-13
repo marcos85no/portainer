@@ -11,7 +11,7 @@ services:
     user: "${UID}:${GID}"
     container_name: filebrowser
     ports:
-      - 1000:1000
+      - 1000:8080
     networks:
       - net
     volumes:
