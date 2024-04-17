@@ -16,7 +16,7 @@ services:
       - net
     volumes:
       - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/:/data"
-      - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/filebrowser/config/:/config"
+      - "/docker/filebrowser/config/:/config"
     environment:
       - "FB_BASEURL=/filebrowser"
     restart: unless-stopped
@@ -47,7 +47,7 @@ services:
     image: vaultwarden/server:latest
     restart: unless-stopped
     volumes:
-      - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/vaultwarden:/data/"
+      - "/docker/vaultwarden:/data/"
     ports:
       - 4000:80
     networks:
