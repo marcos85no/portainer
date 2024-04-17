@@ -19,7 +19,7 @@ services:
     volumes:
       - "/docker/navidrome/data:/data"
 #      - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/musiques/musics:/music/ro"
-      - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/musiques/musics:/music"
+      - "/ZFS/musics/musics:/music"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-media"
@@ -38,7 +38,7 @@ services:
     volumes:
       - "/docker/plexserver/config:/config"
       - "/docker/plexserver/transcode:/transcode"
-      - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153:/tv"
+      - "/ZFS/tv:/tv"
     ports:
       - 32400:32400/tcp
       - 1900:1900/udp
