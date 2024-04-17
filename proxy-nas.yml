@@ -9,9 +9,9 @@ networks:
     container_name: nginx-proxy-manager
     restart: unless-stopped
     volumes:
-      - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/nginx-proxy-manager:/data/"
-      - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/nginx-proxy-manager:/letsencrypt/"
-      - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/docker/nginx-proxy-manager:/etc/letsencrypt/"
+      - "/docker/nginx-proxy-manager:/data/"
+      - "/docker/nginx-proxy-manager:/letsencrypt/"
+      - "/docker/nginx-proxy-manager:/etc/letsencrypt/"
     ports:
       - 80:80
       - 443:443
