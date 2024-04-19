@@ -15,7 +15,7 @@ services:
     networks:
       - net
     volumes:
-      - "/srv/dev-disk-by-uuid-4eabc91d-46b4-4d1d-9b18-5c13f7f80153/:/data"
+      - "/ZFS:/data"
       - "/docker/filebrowser/config/:/config"
     environment:
       - "FB_BASEURL=/filebrowser"
@@ -39,7 +39,7 @@ services:
     networks:
       - net
     labels:
-      - "com.centurylinklabs.watchtower.monitor-only=true"
+      - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
 
   vaultwarden:
@@ -53,7 +53,7 @@ services:
     networks:
       - net
     labels:
-      - "com.centurylinklabs.watchtower.no-pull=true"
+      - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
 
   watchtower:
@@ -64,7 +64,7 @@ services:
       - TZ=Europe/Paris
       - WATCHTOWER_SCHEDULE= 0 0 3 * * *
       - WATCHTOWER_CLEANUP=true
-#      - WATCHTOWER_REMOVE_VOLUMES=true
+      - WATCHTOWER_REMOVE_VOLUMES=true
       - WATCHTOWER_LOG_LEVEL=info
       - WATCHTOWER_LABEL_ENABLE=true
       - WATCHTOWER_MONITOR_ONLY=true
