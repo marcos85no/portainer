@@ -18,7 +18,7 @@ services:
       - ND_SCANSCHEDULE=24h
     volumes:
       - "/docker/navidrome/data:/data"
-      - "/ZFS/musique/navidrome:/music"
+      - "/ZFS/music/navidrome:/music"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-media"
