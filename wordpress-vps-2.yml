@@ -11,7 +11,8 @@ volumes:
 services:
 
   wordpress:
-    image: wordpress
+    container_name: wordpress-vps
+    image: wordpress:latest
     restart: unless-stopped
     ports:
       - 3000:80
@@ -23,8 +24,12 @@ services:
       - wordpress:/var/www/html
     networks:
       - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-vps"
 
   db:
+    container_name: wordpress-db-vps
     image: mysql:8.0
     restart: unless-stopped
     environment:
@@ -36,3 +41,5 @@ services:
       - db:/var/lib/mysql
     networks:
       - net
+    labels:
+      - "org.label-schema.group=app-vps"
