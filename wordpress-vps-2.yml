@@ -14,14 +14,15 @@ services:
     image: wordpress
     restart: unless-stopped
     ports:
-      - 8080:80
+      - 3000:80
     environment:
       - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
       - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
       - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
-      - WORDPRESS_DB_NAME: db_lefumoirbigouden
     volumes:
       - wordpress:/var/www/html
+    networks:
+      - net
 
   db:
     image: mysql:8.0
@@ -33,3 +34,5 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
       - db:/var/lib/mysql
+    networks:
+      - net
