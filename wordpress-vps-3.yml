@@ -15,7 +15,7 @@ services:
     image: wordpress:latest
     restart: unless-stopped
     ports:
-      - 3000:80
+      - 3003:80
     environment:
       - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
       - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
