@@ -24,6 +24,27 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
 
+  resilio-sync:
+    image: lscr.io/linuxserver/resilio-sync:latest
+    container_name: resilio-sync
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - /docker/resilio/config:/config
+      - /ZFS:/downloads
+      - /ZFS:/sync
+    ports:
+      - 8888:8888
+      - 55555:55555
+    networks:
+      - net
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-admin"
+
   vaultwarden:
     container_name: vaultwarden
     image: vaultwarden/server:latest
