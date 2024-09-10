@@ -45,6 +45,34 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
 
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - USER=${USER_TRANSMISSION}
+      - PASS=${PWD_TRANSMISSION}
+
+    volumes:
+      - "/docker/transmission/data:/config"
+      - "/ZFS/repo/torrents-transmission/downloads:/downloads"
+      - "/ZFS/tv/animes:/animes"
+      - "/ZFS/tv/dessins animes:/dessins animes"
+      - "/ZFS/tv/films:/films"
+      - "/ZFS/tv/series:/series"
+      - "/ZFS/repo:/repo"
+      - "/ZFS/repo/torrents-transmission:/watch"
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-admin"
+
   vaultwarden:
     container_name: vaultwarden
     image: vaultwarden/server:latest
