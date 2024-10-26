@@ -8,7 +8,7 @@ services:
 
   navidrome:
     image: deluan/navidrome:latest
-    container_name: navidrome
+    container_name: navidrome-nas
     ports:
       - 4533:4533
     networks:
@@ -24,7 +24,7 @@ services:
       - "org.label-schema.group=app-media"
 
   plex:
-    container_name: plex
+    container_name: plex-nas
     image: plexinc/pms-docker:latest
     restart: unless-stopped
     environment:
