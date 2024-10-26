@@ -33,7 +33,6 @@ services:
       - TZ=Europe/Paris
       - USER=${USER_TRANSMISSION}
       - PASS=${PWD_TRANSMISSION}
-
     volumes:
       - "/docker/transmission/data:/config"
       - "/ZFS/repo/torrents-transmission/downloads:/downloads"
