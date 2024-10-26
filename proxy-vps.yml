@@ -8,7 +8,7 @@ services:
     
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:latest
-    container_name: nginx-proxy-manager-vps
+    container_name: proxy-vps
     restart: unless-stopped
     volumes:
       - "/docker/nginx-proxy-manager/data:/data/"
