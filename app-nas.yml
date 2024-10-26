@@ -9,7 +9,7 @@ services:
   filebrowser:
     image: hurlenko/filebrowser
     user: "${UID}:${GID}"
-    container_name: filebrowser
+    container_name: filebrowser-nas
     ports:
       - 1000:8080
     networks:
@@ -26,7 +26,7 @@ services:
 
   transmission:
     image: lscr.io/linuxserver/transmission:latest
-    container_name: transmission
+    container_name: transmission-nas
     environment:
       - PUID=1000
       - PGID=1000
@@ -52,7 +52,7 @@ services:
       - "org.label-schema.group=app-admin"
 
   vaultwarden:
-    container_name: vaultwarden
+    container_name: vaultwarden-nas
     image: vaultwarden/server:latest
     restart: unless-stopped
     volumes:
@@ -66,7 +66,7 @@ services:
       - "org.label-schema.group=app-admin"
 
   watchtower:
-    container_name: watchtower
+    container_name: watchtower-nas
     image: containrrr/watchtower:latest
     restart: unless-stopped
     environment:
