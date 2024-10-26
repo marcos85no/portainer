@@ -28,8 +28,8 @@ services:
     image: lscr.io/linuxserver/transmission:latest
     container_name: transmission
     environment:
-      - PUID=0
-      - PGID=0
+      - PUID=1000
+      - PGID=1000
       - TZ=Europe/Paris
       - USER=${USER_TRANSMISSION}
       - PASS=${PWD_TRANSMISSION}
