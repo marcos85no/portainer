@@ -47,11 +47,12 @@ services:
       - "org.label-schema.group=app-admin"
 
   qbitorrent:
-    image: docker.io/wernight/qbittorrent:latest
+    image: wernight/qbittorrent:latest
     container_name: qbitorrent-nas
     environment:
       - PUID=1000
       - PGID=1000
+      - TZ=Europe/Paris
     volumes:
       - "/docker/qbitorrent/config:/config"
       - "/ZFS/repo/torrents:/torrents"
