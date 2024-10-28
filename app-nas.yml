@@ -46,28 +46,6 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
 
-  qbitorrent:
-    image: wernight/qbittorrent:latest
-    container_name: qbitorrent-nas
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Paris
-    volumes:
-      - "/docker/qbitorrent/config:/config"
-      - "/ZFS/repo/torrents:/torrents"
-      - "/ZFS/repo/torrents/downloads:/downloads"
-    ports:
-      - 2000:8080
-      - 6881:6881
-      - 6881:6881/udp
-    networks:
-      - net
-    restart: unless-stopped
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app-admin"
-
   vaultwarden:
     container_name: vaultwarden-nas
     image: vaultwarden/server:latest
