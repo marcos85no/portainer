@@ -36,16 +36,33 @@ services:
     volumes:
       - "/docker/transmission/data:/config"
       - "/ZFS/repo/torrents-transmission/downloads:/downloads"
-      - "/ZFS/tv/animes:/animes"
-      - "/ZFS/tv/dessins animes:/dessins animes"
-      - "/ZFS/tv/films:/films"
-      - "/ZFS/tv/series:/series"
-      - "/ZFS/repo:/repo"
-      - "/ZFS/repo/torrents-transmission:/watch"
+      - "/ZFS/repo/torrents:/watch"
     ports:
       - 9091:9091
       - 51413:51413
       - 51413:51413/udp
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-admin"
+
+  qbitorrent:
+    image: docker.io/wernight/qbittorrent:latest
+    container_name: qbitorrent-nas
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - "/docker/qbitorrent/config:/config"
+      - "/ZFS/repo/torrents:/torrents"
+      - "/ZFS/repo/torrents/downloads:/downloads"
+    ports:
+      - 2000:8080
+      - 6881:6881
+      - 6881:6881/udp
+    networks:
+      - net
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
