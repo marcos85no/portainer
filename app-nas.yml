@@ -111,7 +111,7 @@ services:
     volumes:
       - "/docker/resilio/config:/config"
       - "/docker/resilio/downloads:/downloads"
-      - "/ZFS/documents:/sync"
+      - "/ZFS:/sync"
     ports:
       - 8888:8888
       - 55555:55555
