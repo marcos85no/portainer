@@ -101,7 +101,7 @@ services:
       - "org.label-schema.group=app-admin"
 
   resilio:
-    container_name: resilio
+    container_name: resilio-nas
     image: lscr.io/linuxserver/resilio-sync:latest
     restart: unless-stopped
     environment:
