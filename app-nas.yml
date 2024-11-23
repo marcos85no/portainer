@@ -99,3 +99,23 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     labels:
       - "org.label-schema.group=app-admin"
+
+  resilio:
+    container_name: resilio
+    image: lscr.io/linuxserver/resilio-sync:latest
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - "/docker/resilio/config:/config"
+      - "/docker/resilio/downloads:/downloads"
+    ports:
+      - 8888:8888
+      - 55555:55555
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-admin"
