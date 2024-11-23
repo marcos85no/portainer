@@ -47,13 +47,27 @@ services:
       - "org.label-schema.group=app-admin"
 
   vaultwarden:
-    container_name: vaultwarden-nas
+    container_name: vaultwarden-marcos-nas
     image: vaultwarden/server:latest
     restart: unless-stopped
     volumes:
-      - "/docker/vaultwarden:/data/"
+      - "/docker/vaultwarden-marcos:/data/"
     ports:
       - 4000:80
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-admin"
+
+  vaultwarden:
+    container_name: vaultwarden-mel-nas
+    image: vaultwarden/server:latest
+    restart: unless-stopped
+    volumes:
+      - "/docker/vaultwarden-mel:/data/"
+    ports:
+      - 4010:80
     networks:
       - net
     labels:
