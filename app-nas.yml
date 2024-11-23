@@ -46,7 +46,7 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
 
-  vaultwarden:
+  vaultwarden-marcos:
     container_name: vaultwarden-marcos-nas
     image: vaultwarden/server:latest
     restart: unless-stopped
@@ -60,7 +60,7 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
 
-  vaultwarden:
+  vaultwarden-mel:
     container_name: vaultwarden-mel-nas
     image: vaultwarden/server:latest
     restart: unless-stopped
