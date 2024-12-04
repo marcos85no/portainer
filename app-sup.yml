@@ -11,7 +11,7 @@ volumes:
 services:
 
   cadvisor:
-    image: google/cadvisor
+    image: google/cadvisor:latest
     container_name: cadvisor
     volumes:
       - /:/rootfs:ro
@@ -24,9 +24,13 @@ services:
       - "8005:8080"
     networks:
       - sup
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-sup"
 
   prometheus:
-    image: prom/prometheus:v2.0.0
+    image: prom/prometheus:latest
     container_name: prometheus
     volumes:
       - ./docker/prometheus/:/etc/prometheus/
@@ -43,9 +47,13 @@ services:
        - "9090:9090"
     networks:
        - sup
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-sup"
 
   grafana:
-    image: grafana/grafana:4.6.2
+    image: grafana/grafana:latest
     container_name: grafana
     volumes:
       - grafana-data:/var/lib/grafana
@@ -55,3 +63,7 @@ services:
       - "3000:3000"
     networks:
       - sup
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-sup"
