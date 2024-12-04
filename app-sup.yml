@@ -11,7 +11,7 @@ volumes:
 services:
 
   cadvisor:
-    image: google/cadvisor:latest
+    image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor-nas
     privileged: true
     devices:
