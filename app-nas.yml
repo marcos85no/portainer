@@ -16,7 +16,7 @@ services:
       - net
     volumes:
       - "/ZFS:/data"
-      - "/docker/filebrowser/config/:/config"
+      - "/docker/app-nas/filebrowser/config/:/config"
     environment:
       - "FB_BASEURL=/filebrowser"
     restart: unless-stopped
@@ -34,8 +34,8 @@ services:
       - USER=${USER_TRANSMISSION}
       - PASS=${PWD_TRANSMISSION}
     volumes:
-      - "/docker/transmission/data:/config"
-      - "/ZFS/repo/torrents-transmission/downloads:/downloads"
+      - "/docker/app-nas/transmission/data:/config"
+      - "/ZFS/repo/transmission:/downloads"
     ports:
       - 9091:9091
       - 51413:51413
@@ -50,7 +50,7 @@ services:
     image: vaultwarden/server:latest
     restart: unless-stopped
     volumes:
-      - "/docker/vaultwarden-marcos:/data/"
+      - "/docker/app-nas/vaultwarden-marcos:/data/"
     ports:
       - 4000:80
     networks:
@@ -64,7 +64,7 @@ services:
     image: vaultwarden/server:latest
     restart: unless-stopped
     volumes:
-      - "/docker/vaultwarden-mel:/data/"
+      - "/docker/app-nas/vaultwarden-mel:/data/"
     ports:
       - 4010:80
     networks:
@@ -108,8 +108,8 @@ services:
       - PGID=1000
       - TZ=Europe/Paris
     volumes:
-      - "/docker/resilio/config:/config"
-      - "/docker/resilio/downloads:/downloads"
+      - "/docker/app-nas/resilio/config:/config"
+      - "/docker/app-nas/resilio/downloads:/downloads"
       - "/ZFS:/sync"
     ports:
       - 8888:8888
