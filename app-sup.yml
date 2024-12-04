@@ -38,6 +38,7 @@ services:
     container_name: prometheus-nas
     volumes:
       - prometheus-data:/prometheus
+      - /docker/app-sup/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
       - /docker/app-sup/prometheus:/etc/prometheus/
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
