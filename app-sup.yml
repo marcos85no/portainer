@@ -13,15 +13,18 @@ services:
   cadvisor:
     image: google/cadvisor:latest
     container_name: cadvisor-nas
+    privileged: true
+    devices:
+      - /dev/kmsg:/dev/kmsg
     volumes:
       - /:/rootfs:ro
-      - /var/run:/var/run:rw
+      - /var/run:/var/run:ro
       - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
+      - /var/lib/docker:/var/lib/docker:ro
     expose:
       - 8080
     ports:
-      - "8005:8080"
+      - 8005:8080
     networks:
       - sup
     restart: unless-stopped
@@ -44,7 +47,7 @@ services:
     expose:
        - 9090
     ports:
-       - "9090:9090"
+       - 9090:9090
     networks:
        - sup
     restart: unless-stopped
@@ -60,7 +63,7 @@ services:
     expose:
       - 3000
     ports:
-      - "3000:3000"
+      - 3000:3000
     networks:
       - sup
     restart: unless-stopped
