@@ -17,7 +17,7 @@ services:
     environment:
       - ND_SCANSCHEDULE=24h
     volumes:
-      - "/docker/navidrome/data:/data"
+      - "/docker/app-media/navidrome/data:/data"
       - "/ZFS/musiques/navidrome:/music"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -35,8 +35,8 @@ services:
       - PLEX_CLAIM=${CLAIM_PLEX}
       - HOSTNAME=PlexServer
     volumes:
-      - "/docker/plexserver/config:/config"
-      - "/docker/plexserver/transcode:/transcode"
+      - "/docker/app-media/plexserver/config:/config"
+      - "/docker/app-media/plexserver/transcode:/transcode"
       - "/ZFS/tv:/tv"
     ports:
       - 32400:32400/tcp
