@@ -7,7 +7,7 @@ networks:
 services:
 
   filebrowser:
-    image: hurlenko/filebrowser
+    image: hurlenko/filebrowser:latest
     user: "${UID}:${GID}"
     container_name: filebrowser-nas
     ports:
@@ -36,7 +36,6 @@ services:
     volumes:
       - "/docker/transmission/data:/config"
       - "/ZFS/repo/torrents-transmission/downloads:/downloads"
-      - "/ZFS/repo/torrents:/watch"
     ports:
       - 9091:9091
       - 51413:51413
