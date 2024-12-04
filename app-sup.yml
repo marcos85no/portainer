@@ -12,7 +12,7 @@ services:
 
   cadvisor:
     image: google/cadvisor:latest
-    container_name: cadvisor
+    container_name: cadvisor-nas
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
@@ -31,7 +31,7 @@ services:
 
   prometheus:
     image: prom/prometheus:latest
-    container_name: prometheus
+    container_name: prometheus-nas
     volumes:
       - ./docker/prometheus/:/etc/prometheus/
       - prometheus-data:/prometheus
@@ -54,7 +54,7 @@ services:
 
   grafana:
     image: grafana/grafana:latest
-    container_name: grafana
+    container_name: grafana-nas
     volumes:
       - grafana-data:/var/lib/grafana
     expose:
