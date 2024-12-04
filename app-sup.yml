@@ -1,12 +1,13 @@
 version: "3.8"
 
 networks:
-  sup:
+  net:
     driver: bridge
 
 volumes:
   prometheus-data: {}
   grafana-data: {}
+  alertmanager-data: {}
 
 services:
 
@@ -26,7 +27,7 @@ services:
     ports:
       - 8005:8080
     networks:
-      - sup
+      - net
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -36,8 +37,8 @@ services:
     image: prom/prometheus:latest
     container_name: prometheus-nas
     volumes:
-      - ./docker/prometheus/:/etc/prometheus/
       - prometheus-data:/prometheus
+      - /docker/app-sup/prometheus:/etc/prometheus/
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
@@ -49,7 +50,7 @@ services:
     ports:
        - 9090:9090
     networks:
-       - sup
+       - net
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -65,7 +66,7 @@ services:
     ports:
       - 3000:3000
     networks:
-      - sup
+      - net
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
