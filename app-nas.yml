@@ -121,3 +121,17 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
+
+  vaultwarden:
+    container_name: vaultwarden-nas
+    image: vaultwarden/server:latest
+    restart: unless-stopped
+    volumes:
+      - "/docker/app-nas/vaultwarden:/data/"
+    ports:
+      - 4030:80
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-admin"
