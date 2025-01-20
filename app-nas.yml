@@ -47,34 +47,6 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
 
-  vaultwarden-marcos:
-    container_name: vaultwarden-marcos-nas
-    image: vaultwarden/server:latest
-    restart: unless-stopped
-    volumes:
-      - "/docker/app-nas/vaultwarden-marcos:/data/"
-    ports:
-      - 4000:80
-    networks:
-      - net
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app-admin"
-
-  vaultwarden-mel:
-    container_name: vaultwarden-mel-nas
-    image: vaultwarden/server:latest
-    restart: unless-stopped
-    volumes:
-      - "/docker/app-nas/vaultwarden-mel:/data/"
-    ports:
-      - 4010:80
-    networks:
-      - net
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app-admin"
-
   watchtower:
     container_name: watchtower-nas
     image: containrrr/watchtower:latest
@@ -129,7 +101,7 @@ services:
     volumes:
       - "/docker/app-nas/vaultwarden:/data/"
     ports:
-      - 4030:80
+      - 4000:80
     networks:
       - net
     labels:
