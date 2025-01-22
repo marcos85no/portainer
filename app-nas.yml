@@ -107,3 +107,21 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
+      
+  wetty:
+    container_name: wetty
+    environment:
+        - REMOTE_SSH_SERVER=192.168.0.12
+        - REMOTE_SSH_PORT=2985
+        - REMOTE_SSH_USER=userssh
+        - TZ=Europe/Paris
+    ports:
+        - 3000:3000
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-admin"
+    hostname: nas.localdomain
+    restart: unless-stopped
+    image: wettyoss/wetty:latest
