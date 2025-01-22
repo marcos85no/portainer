@@ -121,6 +121,5 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
-    hostname: nas.localdomain
     restart: unless-stopped
     image: wettyoss/wetty:latest
