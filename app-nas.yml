@@ -36,6 +36,7 @@ services:
     volumes:
       - "/docker/app-nas/transmission/data:/config"
       - "/ZFS/repo/transmission:/downloads"
+      - "/ZFS/repo/transmission:/watch"
     ports:
       - 9091:9091
       - 51413:51413
