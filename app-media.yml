@@ -53,3 +53,26 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-media"
+
+  jellyfin:
+    image: ghcr.io/linuxserver/jellyfin:latest
+    container_name: jellyfin-nas
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - JELLYFIN_PublishedServerUrl=https://tv2.pariteau.fr #optional
+    volumes:
+      - /docker/app-nas/jellyfin/config:/config
+      - /docker/app-nas/jellyfin/cache:/cache
+      - /ZFS/tv:/media
+    ports:
+      - 8096:8096
+      - 8920:8920 #optional
+      - 7359:7359/udp #optional
+    networks:
+      - net
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-media"
