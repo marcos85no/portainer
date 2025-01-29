@@ -108,3 +108,21 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
+
+  organizr:
+     image: organizr/organizr:latest
+     container_name: organizr-app
+     environment:
+       - PUID=1000
+       - PGID=1000
+       - TZ=Europe/Paris
+     volumes:
+       - /docker/app-nas/organizr/config/organizr:/config
+     ports:
+     - 72:80
+     restart: unless-stopped
+   networks:
+     - net
+   labels:
+     - "com.centurylinklabs.watchtower.enable=true"
+     - "org.label-schema.group=app-admin"
