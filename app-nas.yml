@@ -111,7 +111,7 @@ services:
 
   organizr:
     image: organizr/organizr:latest
-    container_name: organizr-app
+    container_name: organizr-nas
     environment:
       - PUID=1000
       - PGID=1000
@@ -129,7 +129,7 @@ services:
 
   monitorr:
     image: monitorr/monitorr:latest
-    container_name: monitorr-app
+    container_name: monitorr-nas
     environment:
       - PUID=1000
       - PGID=1000
