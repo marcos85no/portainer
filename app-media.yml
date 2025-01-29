@@ -61,7 +61,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Paris
-      - JELLYFIN_PublishedServerUrl=https://tv2.pariteau.fr #optional
+      - JELLYFIN_PublishedServerUrl=https://tv.pariteau.fr
     volumes:
       - /docker/app-nas/jellyfin/config:/config
       - /docker/app-nas/jellyfin/cache:/cache
