@@ -126,3 +126,42 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
+
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett-nas
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - /docker/app-nas/jackett/data:/config
+      - /docker/app-nas/jackett/downloads:/downloads
+    ports:
+      - 9117:9117
+    restart: unless-stopped
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-admin"
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr-nas
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - /docker/app-nas/radarr/data:/config
+#      - /path/to/movies:/movies #optional
+#      - /path/to/download-client-downloads:/downloads #optional
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-admin"
