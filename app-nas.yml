@@ -126,3 +126,21 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
+
+  monitorr:
+    image: monitorr/monitorr:latest
+    container_name: monitorr-app
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - /docker/app-nas/monitorr:/app
+    ports:
+    - 800:80
+    restart: unless-stopped
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-admin"
