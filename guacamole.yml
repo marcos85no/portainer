@@ -1,4 +1,8 @@
-version: '3.8'
+version: "3.8"
+
+networks:
+  net:
+    driver: bridge
 
 services:
     guacamole_db:
@@ -9,12 +13,14 @@ services:
         volumes:
             - ./guacamole_db:/var/lib/mysql
         environment:
-            - MYSQL_ROOT_PASSWORD=change-me-root-password
+            - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD_MARIADB}
             - MYSQL_DATABASE=guacamole_db
-            - MYSQL_USER=guacamole_user
-            - MYSQL_PASSWORD=change-me-user-password
+            - MYSQL_USER=${USER_GUACAMOLE}
+            - MYSQL_PASSWORD=${USER_PASSWORD_GUACAMOLE}
         expose:
             - 3306
+        networks:
+            - net
     
     guacd:
         container_name: guacd
@@ -26,6 +32,8 @@ services:
             - ./guacd_record:/record:rw 
         expose:
             - 4822
+        networks:
+            - net
 
     guacamole:
         container_name: guacamole
@@ -37,12 +45,14 @@ services:
             - guacd
         ports:
             - 8080:8080
+        networks:
+            - net
         links:
             - guacd
         environment:
             - GUACD_HOSTNAME=guacd
             - MYSQL_HOSTNAME=guacamole_db
             - MYSQL_DATABASE=guacamole_db
-            - MYSQL_USER=guacamole_user
-            - MYSQL_PASSWORD=change-me-user-password
+            - MYSQL_USER=${USER_MARIADB}
+            - MYSQL_PASSWORD=${USER_PASSWORD_GUACAMOLE}
             - REMOTE_IP_VALVE_ENABLED=true
