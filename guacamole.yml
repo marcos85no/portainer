@@ -57,6 +57,8 @@ services:
         - MYSQL_USER=${MYSQL_USER}
         - MYSQL_PASSWORD=${MYSQL_PASSWORD}
         - RECORDING_SEARCH_PATH=${RECORDING_SEARCH_PATH}
+        - MYSQL_DRIVER=mysql
+        - MYSQL_SSL_MODE=disabled
       volumes:
         - ./guacd_record:${RECORDING_SEARCH_PATH}:ro
       networks:
