@@ -13,10 +13,10 @@ services:
       volumes:
         - ./guacamole_db:/var/lib/mysql
       environment:
-        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-        - MYSQL_DATABASE=${MYSQL_DATABASE}
-        - MYSQL_USER=${MYSQL_USER}
-        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=guacamole
+        - MYSQL_USER=user
+        - MYSQL_PASSWORD=user
       expose:
         - 3306
       networks:
@@ -53,12 +53,10 @@ services:
         - WEBAPP_CONTEXT=ROOT
         - GUACD_HOSTNAME=guacd
         - MYSQL_HOSTNAME=guacamole_db
-        - MYSQL_DATABASE=${MYSQL_DATABASE}
-        - MYSQL_USER=${MYSQL_USER}
-        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - MYSQL_DATABASE=guacamole
+        - MYSQL_USER=user
+        - MYSQL_PASSWORD=user
         - RECORDING_SEARCH_PATH=${RECORDING_SEARCH_PATH}
-        - MYSQL_DRIVER=mysql
-        - MYSQL_SSL_MODE=disabled
       volumes:
         - ./guacd_record:${RECORDING_SEARCH_PATH}:ro
       networks:
