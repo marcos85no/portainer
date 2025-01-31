@@ -50,6 +50,7 @@ services:
       links:
         - guacd
       environment:
+        - WEBAPP_CONTEXT=ROOT
         - GUACD_HOSTNAME=guacd
         - MYSQL_HOSTNAME=guacamole_db
         - MYSQL_DATABASE=${MYSQL_DATABASE}
