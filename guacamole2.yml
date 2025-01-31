@@ -17,7 +17,7 @@ services:
       POSTGRES_DB=guacamole_db
       POSTGRES_PASSWORD=${GUAC_DB_PASSWORD}
       POSTGRES_USER=${GUACDB_USER}
-      TZ: Europe/Paris
+      TZ=Europe/Paris
     volumes:
       - /docker/guacamole/init:/docker-entrypoint-initdb.d:ro
       - /docker/guacamole/data:/var/lib/postgresql/data:rw
@@ -32,7 +32,7 @@ services:
       POSTGRES_HOSTNAME=guacamole_db
       POSTGRES_PASSWORD=${GUAC_DB_PASSWORD}
       POSTGRES_USER=${GUACDB_USER}
-#      TOTP_ENABLED: 'true'
+#      TOTP_ENABLED='true'
     depends_on:
       - guacd
       - guacamole_db
