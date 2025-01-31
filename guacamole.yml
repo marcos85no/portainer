@@ -1,58 +1,62 @@
 version: "3.8"
 
 networks:
-  net:
-    driver: bridge
+  guac_net:
 
 services:
-    guacamole_db:
-        container_name: guacamole_db
-        hostname: guacamole_db
-        image: mariadb:10.11
-        restart: always
-        volumes:
-            - ./guacamole_db:/var/lib/mysql
-        environment:
-            - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD_MARIADB}
-            - MYSQL_DATABASE=guacamole_db
-            - MYSQL_USER=${USER_GUACAMOLE}
-            - MYSQL_PASSWORD=${USER_PASSWORD_GUACAMOLE}
-        expose:
-            - 3306
-        networks:
-            - net
-    
-    guacd:
-        container_name: guacd
-        hostname: guacd
-        image: guacamole/guacd:latest
-        restart: always
-        volumes:
-            - ./guacd_drive:/drive:rw 
-            - ./guacd_record:/record:rw 
-        expose:
-            - 4822
-        networks:
-            - net
 
+    guacamole_db:
+      container_name: guacamole_db-nas
+      hostname: guacamole_db
+      image: mariadb:latest
+      restart: unless-stopped
+      volumes:
+        - ./guacamole_db:/var/lib/mysql
+      environment:
+        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      expose:
+        - 3306
+      networks:
+        - guac_net
+        
+    guacd:
+      container_name: guacd-nas
+      hostname: guacd
+      image: guacamole/guacd:latest
+      restart: unless-stopped
+      environment:
+        - RECORDING_SEARCH_PATH=${RECORDING_SEARCH_PATH}
+      volumes:
+        - ./guacd_drive:/drive:rw
+        - ./guacd_record:${RECORDING_SEARCH_PATH}:rw
+      expose:
+        - 4822
+      networks:
+        - guac_net
+        
     guacamole:
-        container_name: guacamole
-        hostname: guacamole
-        restart: always
-        image: guacamole/guacamole:latest
-        depends_on:
-            - guacamole_db
-            - guacd
-        ports:
-            - 8080:8080
-        networks:
-            - net
-        links:
-            - guacd
-        environment:
-            - GUACD_HOSTNAME=guacd
-            - MYSQL_HOSTNAME=guacamole_db
-            - MYSQL_DATABASE=guacamole_db
-            - MYSQL_USER=${USER_MARIADB}
-            - MYSQL_PASSWORD=${USER_PASSWORD_GUACAMOLE}
-            - REMOTE_IP_VALVE_ENABLED=true
+      container_name: guacamole-nas
+      hostname: guacamole
+      restart: unless-stopped
+      image: guacamole/guacamole:latest
+      depends_on:
+        - guacamole_db
+        - guacd
+      ports:
+        - 8080:8080
+      links:
+        - guacd
+      environment:
+        - GUACD_HOSTNAME=guacd
+        - MYSQL_HOSTNAME=guacamole_db
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+        - RECORDING_SEARCH_PATH=${RECORDING_SEARCH_PATH}
+      volumes:
+        - ./guacd_record:${RECORDING_SEARCH_PATH}:ro
+      networks:
+        - guac_net
