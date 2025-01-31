@@ -8,6 +8,8 @@ services:
       - /docker/guacamole/drive:/drive:rw
       - /docker/guacamole/record:/record:rw
     restart: unless-stopped
+    expose:
+      - 4822
     
   guacamole_db:
     image: postgres:latest
@@ -22,6 +24,8 @@ services:
       - /docker/guacamole/init:/docker-entrypoint-initdb.d:ro
       - /docker/guacamole/data:/var/lib/postgresql/data:rw
     restart: unless-stopped
+    expose:
+      - 3306
 
   guacamole_app:
     image: guacamole/guacamole:latest
@@ -36,6 +40,8 @@ services:
     depends_on:
       - guacd
       - guacamole_db
+    links:
+      - guacd
     ports:
       - 8080:8080
     restart: unless-stopped
