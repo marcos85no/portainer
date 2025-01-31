@@ -56,7 +56,7 @@ services:
         - MYSQL_DATABASE=guacamole
         - MYSQL_USER=user
         - MYSQL_PASSWORD=user
-        - RECORDING_SEARCH_PATH=${RECORDING_SEARCH_PATH}
+        - REMOTE_IP_VALVE_ENABLED=true
       volumes:
         - ./guacd_record:${RECORDING_SEARCH_PATH}:ro
       networks:
