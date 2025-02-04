@@ -9,8 +9,6 @@ services:
   guac-proxy:
     image: guacamole/guacd:latest
     container_name: guac-proxy
-    expose:
-      - 4822
     networks:
       - net
     restart: unless-stopped
@@ -28,8 +26,6 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - /docker/guacamole/mysql:/var/lib/mysql
-    expose:
-      - 3306
     networks:
       - net
     restart: unless-stopped
@@ -45,11 +41,10 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - GUACD_HOSTNAME=guac-proxy
+      - MYSQL_HOSTNAME=guac-sql
     depends_on:
       - guac-proxy
       - guac-sql
-    links:
-      - guac-proxy
     ports:
       - 8080:8080
     networks:
