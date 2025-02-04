@@ -40,7 +40,7 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-    link:
+    depends_on:
       - guacd-nas
       - mysql-guacamole-nas
     ports:
