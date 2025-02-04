@@ -42,6 +42,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - GUACD_HOSTNAME=guac-proxy
       - MYSQL_HOSTNAME=guac-sql
+      - WEBAPP_CONTEXT=root
     depends_on:
       - guac-proxy
       - guac-sql
