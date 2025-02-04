@@ -6,19 +6,21 @@ networks:
 
 services:
 
-  guacd-nas:
+  guac-proxy:
     image: guacamole/guacd:latest
-    container_name: guacd-nas
+    container_name: guac-proxy
+    expose:
+      - 4822
     networks:
       - net
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app-guacamole"
+      - "org.label-schema.group=app-guac"
 
-  mysql-guacamole-nas:
+  guac-sql:
     image: mysql
-    container_name: mysql-guacamole-nas
+    container_name: guac-sql
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -26,26 +28,27 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - /docker/guacamole/mysql:/var/lib/mysql
+    expose:
+      - 3306
     networks:
       - net
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
-      - "org.label-schema.group=app-guacamole"
+      - "org.label-schema.group=app-guac"
 
-  guacamole-nas:
+  guac-web:
     image: guacamole/guacamole:latest
-    container_name: guacamole-nas
+    container_name: guac-web
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     depends_on:
-      - guacd-nas
-      - mysql-guacamole-nas
+      - guac-proxy
+      - guac-sql
     links:
-      - guacd-nas
-      - mysql-guacamole-nas
+      - guac-proxy
     ports:
       - 8080:8080
     networks:
@@ -53,4 +56,4 @@ services:
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app-guacamole"
+      - "org.label-schema.group=app-guac"
