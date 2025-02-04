@@ -43,6 +43,9 @@ services:
     depends_on:
       - guacd-nas
       - mysql-guacamole-nas
+    links:
+      - guacd-nas
+      - mysql-guacamole-nas
     ports:
       - 8080:8080
     networks:
