@@ -10,7 +10,7 @@ services:
     image: guacamole/guacd:latest
     container_name: guacd-nas
     networks:
-      - net:
+      - net
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -27,7 +27,7 @@ services:
     volumes:
       - /docker/guacamole/mysql:/var/lib/mysql
     networks:
-      - net:
+      - net
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -46,7 +46,7 @@ services:
     ports:
       - 8080:8080
     networks:
-      - net:
+      - net
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
