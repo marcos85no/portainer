@@ -3,6 +3,8 @@ version: "3.8"
 networks:
   net:
     driver: bridge
+    config:
+      -subnet: "172.40.0.0/16"
 
 services:
 
@@ -10,7 +12,8 @@ services:
     image: guacamole/guacd:latest
     container_name: guacd-nas
     networks:
-      - net
+      - net:
+        ipv4_address: 172.40.0.1
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -20,14 +23,15 @@ services:
     image: mysql
     container_name: mysql-guacamole-nas
     environment:
-      - MYSQL_ROOT_PASSWORD=
-      - MYSQL_DATABASE=guacamole_db
-      - MYSQL_USER=guacamole_user
-      - MYSQL_PASSWORD=some_password
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
       - /docker/guacamole/mysql:/var/lib/mysql
     networks:
-      - net
+      - net:
+        ipv4_address: 172.40.0.2
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -37,16 +41,17 @@ services:
     image: guacamole/guacamole:latest
     container_name: guacamole-nas
     environment:
-      - MYSQL_DATABASE=guacamole_db
-      - MYSQL_USER=guacamole_user
-      - MYSQL_PASSWORD=some_password
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     link:
       - guacd-nas
       - mysql
     ports:
       - 8080:8080
     networks:
-      - net
+      - net:
+        ipv4_address: 172.40.0.3
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
