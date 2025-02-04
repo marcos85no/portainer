@@ -42,7 +42,8 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - GUACD_HOSTNAME=guac-proxy
       - MYSQL_HOSTNAME=guac-sql
-      - WEBAPP_CONTEXT=root
+#      - WEBAPP_CONTEXT=root
+      - REMOTE_IP_VALVE_ENABLED=true
     depends_on:
       - guac-proxy
       - guac-sql
