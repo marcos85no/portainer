@@ -3,10 +3,6 @@ version: "3.8"
 networks:
   net:
     driver: bridge
-    ipam:
-      driver: default
-      config:
-        -subnet: "172.40.0.0/16"
 
 services:
 
@@ -15,7 +11,6 @@ services:
     container_name: guacd-nas
     networks:
       - net:
-        ipv4_address: 172.40.0.1
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
@@ -33,7 +28,6 @@ services:
       - /docker/guacamole/mysql:/var/lib/mysql
     networks:
       - net:
-        ipv4_address: 172.40.0.2
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
