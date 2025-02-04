@@ -42,7 +42,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     link:
       - guacd-nas
-      - mysql
+      - mysql-guacamole-nas
     ports:
       - 8080:8080
     networks:
