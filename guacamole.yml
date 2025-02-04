@@ -30,7 +30,7 @@ services:
       - net
     restart: unless-stopped
     labels:
-      - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.enable=false"
       - "org.label-schema.group=app-guacamole"
 
   guacamole-nas:
