@@ -7,7 +7,7 @@ networks:
 services:
 
 watchtower:
-    container_name: watchtower-nas
+    container_name: watchtower-vps
     image: containrrr/watchtower:latest
     restart: unless-stopped
     environment:
