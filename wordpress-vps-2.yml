@@ -13,7 +13,7 @@ services:
   wordpress:
     container_name: wordpress-vps
     image: wordpress:latest
-    restart: unless-stopped
+    restart: always
     ports:
       - 3000:80
     environment:
@@ -31,7 +31,7 @@ services:
   db:
     container_name: wordpress-db-vps
     image: mysql:8.0
-    restart: unless-stopped
+    restart: always
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
