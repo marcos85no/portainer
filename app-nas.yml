@@ -126,3 +126,16 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
+
+  kuma:
+    image: louislam/uptime-kuma:1
+    container_name: kuma-nas
+    volumes:
+      - /docker/app-nas/kuma:/app/data
+    ports:
+    - 3001:3001
+    restart: unless-stopped
+    networks:
+      - net
+    labels:
+      - "org.label-schema.group=app-admin"
