@@ -139,3 +139,17 @@ services:
       - net
     labels:
       - "org.label-schema.group=app-admin"
+
+  firefox:
+    image: jlesage/firefox:latest
+    container_name: firefox-nas
+    ports:
+      - "5800:5800"
+    restart: unless-stopped
+    networks:
+      - net
+    volumes:
+      - "/docker/app-nas/firefox:/config:rw"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-admin"
