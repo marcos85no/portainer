@@ -1,9 +1,9 @@
-services:
-
 networks:
   net:
     driver: bridge
-    
+
+services:
+  
   grafana:
     image: grafana/grafana:latest
     container_name: grafana-nas
