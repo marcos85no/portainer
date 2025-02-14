@@ -13,8 +13,8 @@ services:
       - net
     restart: unless-stopped
     volumes:
-      - /docker/app-monitoring/grafana/data:/var/lib/grafana
-      - /docker/app-monitoring/grafana/config:/etc/grafana
+      - /docker/app-monitoring/grafana/data:/var/lib/grafana:ro
+      - /docker/app-monitoring/grafana/config:/etc/grafana:ro
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-monitoring"
@@ -50,7 +50,7 @@ services:
     command: "--config.file=/etc/prometheus/prometheus.yaml"
     volumes:
       - /docker/app-monitoring/prometheus/prometheus.yaml:/etc/prometheus/prometheus.yaml:ro
-      - /docker/app-monitoring/prometheus/data:/prometheus
+      - /docker/app-monitoring/prometheus/data:/prometheus:rw
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
