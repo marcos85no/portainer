@@ -1,4 +1,3 @@
-version: 'x'
 services:
   xxx:
     container_name: xxx
