@@ -28,7 +28,7 @@ services:
 
   db:
     container_name: wordpress-db-vps
-    image: mysql:latest
+    image: mysql:8.0
     restart: always
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
