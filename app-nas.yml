@@ -151,3 +151,17 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-admin"
+
+  wetty:
+    image: wettyoss/wetty:latest
+    container_name: wetty-nas
+    networks:
+      - net
+    environment:
+      - SSHHOST=192.168.0.12
+      - SSHPORT=2985
+      - SSHUSER=${SSHUSER}
+      - SSHPASS=${SSHPASS}
+    ports:
+      - 5000:5000
+    restart: unless-stopped
