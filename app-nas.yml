@@ -164,3 +164,6 @@ services:
     ports:
       - 3000:3000
     restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-admin"
