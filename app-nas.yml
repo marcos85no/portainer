@@ -163,5 +163,5 @@ services:
       - SSHUSER=${SSHUSER}
       - SSHPASS=${SSHPASS}
     ports:
-      - 5000:3000
+      - 3000:3000
     restart: unless-stopped
