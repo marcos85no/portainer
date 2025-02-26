@@ -159,9 +159,8 @@ services:
       - net
     environment:
       - SSHHOST=192.168.0.12
-      - SSHPORT=2985
+      - SSHPORT=${SSHPORT}
       - SSHUSER=${SSHUSER}
-      - SSHPASS=${SSHPASS}
     ports:
       - 3000:3000
     restart: unless-stopped
