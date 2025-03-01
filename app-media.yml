@@ -21,37 +21,6 @@ services:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=app-media"
 
-#  plex:
-#    container_name: plex-nas
-#    image: plexinc/pms-docker:latest
-#    restart: unless-stopped
-#    environment:
-#      - PUID=0
-#      - PGID=0
-#      - TZ=EUROPE/Paris
-#      - VERSION=docker
-#      - PLEX_CLAIM=${CLAIM_PLEX}
-#      - HOSTNAME=PlexServer
-#    volumes:
-#      - "/docker/app-media/plexserver/config:/config"
-#      - "/docker/app-media/plexserver/transcode:/transcode"
-#      - "/ZFS/tv:/tv"
-#    ports:
-#      - 32400:32400/tcp
-#      - 1900:1900/udp
-#      - 3005:3005/tcp
-#      - 8324:8324/tcp
-#      - 32410:32410/udp
-#      - 32412:32412/udp
-#      - 32413:32413/udp
-#      - 32414:32414/udp
-#      - 32469:32469/tcp
-#    networks:
-#      - net
-#    labels:
-#      - "com.centurylinklabs.watchtower.enable=true"
-#      - "org.label-schema.group=app-media"
-
   jellyfin:
     image: ghcr.io/linuxserver/jellyfin:latest
     container_name: jellyfin-nas
@@ -61,13 +30,13 @@ services:
       - TZ=Europe/Paris
       - JELLYFIN_PublishedServerUrl=https://tv.pariteau.fr
     volumes:
-      - /docker/app-nas/jellyfin/config:/config
-      - /docker/app-nas/jellyfin/cache:/cache
+      - /docker/app-media/jellyfin/config:/config
+      - /docker/app-media/jellyfin/cache:/cache
       - /ZFS/tv:/media
     ports:
       - 8096:8096
-      - 8920:8920 #optional
-      - 7359:7359/udp #optional
+      - 8920:8920
+      - 7359:7359/udp
     networks:
       - net
     restart: unless-stopped
