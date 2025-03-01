@@ -9,9 +9,9 @@ services:
     container_name: proxy-nas
     restart: unless-stopped
     volumes:
-      - "/docker/nginx-proxy-manager:/data/"
-      - "/docker/nginx-proxy-manager:/letsencrypt/"
-      - "/docker/nginx-proxy-manager:/etc/letsencrypt/"
+      - "/docker/app-proxy:/data/"
+      - "/docker/app-proxy:/letsencrypt/"
+      - "/docker/app-proxy:/etc/letsencrypt/"
     ports:
       - 80:80
       - 443:443
