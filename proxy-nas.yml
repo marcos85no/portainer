@@ -20,4 +20,4 @@ services:
       - net
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app-admin"
+      - "org.label-schema.group=app-system"
