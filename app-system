@@ -1,0 +1,96 @@
+networks:
+  net:
+    driver: bridge
+
+services:
+
+  filebrowser:
+    image: hurlenko/filebrowser:latest
+    user: "${UID}:${GID}"
+    container_name: filebrowser-nas
+    ports:
+      - 1000:8080
+    networks:
+      - net
+    volumes:
+      - "/ZFS:/data"
+      - "/docker/app-nas/filebrowser/config/:/config"
+    environment:
+      - "FB_BASEURL=/filebrowser"
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-system"
+
+  watchtower:
+    container_name: watchtower-nas
+    image: containrrr/watchtower:latest
+    restart: unless-stopped
+    environment:
+      - TZ=Europe/Paris
+      - WATCHTOWER_SCHEDULE= 0 0 0 * * *
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_REMOVE_VOLUMES=true
+      - WATCHTOWER_LOG_LEVEL=info
+      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_NOTIFICATIONS=email
+      - WATCHTOWER_NOTIFICATION_EMAIL_FROM=${EMAILURLFROM}
+      - WATCHTOWER_NOTIFICATION_EMAIL_TO=${EMAILURLTO}
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER=${SMTPSERVER}
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PORT=${EMAILPORT}
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_USER=${EMAILOGIN}
+      - WATCHTOWER_NOTIFICATION_EMAIL_SERVER_PASSWORD=${APPPASSWORD}
+      - WATCHTOWER_NOTIFICATION_EMAIL_DELAY=2
+    networks:
+      - net
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    labels:
+      - "org.label-schema.group=app-system"
+
+  organizr:
+    image: organizr/organizr:latest
+    container_name: organizr-nas
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - /docker/app-nas/organizr/config/organizr:/config
+    ports:
+    - 72:80
+    restart: unless-stopped
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-system"
+
+  kuma:
+    image: louislam/uptime-kuma:1
+    container_name: kuma-nas
+    volumes:
+      - /docker/app-nas/kuma:/app/data
+    ports:
+    - 3001:3001
+    restart: unless-stopped
+    networks:
+      - net
+    labels:
+      - "org.label-schema.group=app-system"
+
+  wetty:
+    image: wettyoss/wetty:latest
+    container_name: wetty-nas
+    networks:
+      - net
+    environment:
+      - SSHHOST=192.168.0.12
+      - SSHPORT=${SSHPORT}
+      - SSHUSER=${SSHUSER}
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-system"
