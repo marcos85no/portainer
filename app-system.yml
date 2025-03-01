@@ -14,7 +14,7 @@ services:
       - net
     volumes:
       - "/ZFS:/data"
-      - "/docker/app-nas/filebrowser/config/:/config"
+      - "/docker/app-system/filebrowser/config/:/config"
     environment:
       - "FB_BASEURL=/filebrowser"
     restart: unless-stopped
@@ -56,7 +56,7 @@ services:
       - PGID=1000
       - TZ=Europe/Paris
     volumes:
-      - /docker/app-nas/organizr/config/organizr:/config
+      - /docker/app-system/organizr/config/organizr:/config
     ports:
     - 72:80
     restart: unless-stopped
@@ -70,7 +70,7 @@ services:
     image: louislam/uptime-kuma:1
     container_name: kuma-nas
     volumes:
-      - /docker/app-nas/kuma:/app/data
+      - /docker/app-system/kuma:/app/data
     ports:
     - 3001:3001
     restart: unless-stopped
