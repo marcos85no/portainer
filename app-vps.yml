@@ -40,7 +40,7 @@ services:
       - SSHPORT=${SSHPORT}
       - SSHUSER=${SSHUSER}
     ports:
-      - 3000:3000
+      - 4000:3000
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
