@@ -29,3 +29,19 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     labels:
       - "org.label-schema.group=app-vps"
+
+  wetty:
+    image: wettyoss/wetty:latest
+    container_name: wetty-nas
+    networks:
+      - net
+    environment:
+      - SSHHOST=51.254.102.122
+      - SSHPORT=${SSHPORT}
+      - SSHUSER=${SSHUSER}
+    ports:
+      - 3000:3000
+    restart: unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=app-vps"
