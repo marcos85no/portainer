@@ -32,7 +32,7 @@ services:
 
   wetty:
     image: wettyoss/wetty:latest
-    container_name: wetty-nas
+    container_name: wetty-vps
     networks:
       - net
     environment:
