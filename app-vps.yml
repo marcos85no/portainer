@@ -7,7 +7,7 @@ services:
   watchtower:
     container_name: watchtower-vps
     image: containrrr/watchtower:latest
-    restart: unless-stopped
+    restart: always
     environment:
       - TZ=Europe/Paris
       - WATCHTOWER_SCHEDULE= 0 0 3 * * *
