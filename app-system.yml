@@ -25,7 +25,7 @@ services:
   watchtower:
     container_name: watchtower-nas
     image: containrrr/watchtower:latest
-    restart: unless-stopped
+    restart: always
     environment:
       - TZ=Europe/Paris
       - WATCHTOWER_SCHEDULE= 0 0 0 * * *
@@ -73,7 +73,7 @@ services:
       - /docker/app-system/kuma:/app/data
     ports:
     - 3001:3001
-    restart: unless-stopped
+    restart: always
     networks:
       - net
     labels:
