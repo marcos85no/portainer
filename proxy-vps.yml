@@ -1,5 +1,3 @@
-version: "3.8"
-
 networks:
   net:
     driver: bridge
@@ -11,9 +9,9 @@ services:
     container_name: proxy-vps
     restart: always
     volumes:
-      - "/docker/nginx-proxy-manager/data:/data/"
-      - "/docker/nginx-proxy-manager/data:/letsencrypt/"
-      - "/docker/nginx-proxy-manager/data:/etc/letsencrypt/"
+      - "/docker/proxy/data:/data/"
+      - "/docker/proxy/data:/letsencrypt/"
+      - "/docker/proxy/data:/etc/letsencrypt/"
     ports:
       - 80:80
       - 443:443
