@@ -9,9 +9,9 @@ services:
     container_name: proxy-vps
     restart: always
     volumes:
-      - "/docker/proxy/data:/data/"
-      - "/docker/proxy/data:/letsencrypt/"
-      - "/docker/proxy/data:/etc/letsencrypt/"
+      - "/docker/proxy:/data/"
+      - "/docker/proxy:/letsencrypt/"
+      - "/docker/proxy:/etc/letsencrypt/"
     ports:
       - 80:80
       - 443:443
