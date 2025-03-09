@@ -2,10 +2,6 @@ networks:
   net:
     driver: bridge
 
-volumes:
-  wordpress:
-  db:
-
 services:
 
   wordpress:
@@ -19,7 +15,7 @@ services:
       - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
       - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
     volumes:
-      - wordpress:/var/www/html
+      - /docker/wordpress/wordpress:/var/www/html
     networks:
       - net
     labels:
@@ -36,7 +32,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
-      - db:/var/lib/mysql
+      - /docker/wordpress/mysql:/var/lib/mysql
     networks:
       - net
     labels:
