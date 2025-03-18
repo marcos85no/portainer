@@ -11,4 +11,4 @@ services:
       - 9000:9000
     labels:
       - com.centurylinklabs.watchtower.enable=true
-      - "org.label-schema.group=vps"
+      - "org.label-schema.group=vps-system"
