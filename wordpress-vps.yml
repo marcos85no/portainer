@@ -20,7 +20,7 @@ services:
       - net
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=wordpress-vps"
+      - "org.label-schema.group=vps-wordpress"
 
   db:
     container_name: wordpress-db-vps
@@ -37,4 +37,4 @@ services:
       - net
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=wordpress-vps"
+      - "org.label-schema.group=vps-wordpress"
