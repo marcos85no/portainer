@@ -26,7 +26,7 @@ services:
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app-nas"
+      - "org.label-schema.group=nas-app"
 
   resilio:
     container_name: resilio-nas
@@ -47,7 +47,7 @@ services:
       - net
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app-nas"
+      - "org.label-schema.group=nas-app"
 
   vaultwarden:
     container_name: vaultwarden-nas
@@ -61,7 +61,7 @@ services:
       - net
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app-nas"
+      - "org.label-schema.group=nas-app"
 
   firefox:
     image: jlesage/firefox:latest
@@ -75,4 +75,4 @@ services:
       - "/docker/app-nas/firefox:/config:rw"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app-nas"
+      - "org.label-schema.group=nas-app"
