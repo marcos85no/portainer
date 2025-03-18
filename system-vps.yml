@@ -28,7 +28,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     labels:
-      - "org.label-schema.group=system-vps"
+      - "org.label-schema.group=vps-system"
 
   wetty:
     image: wettyoss/wetty:latest
@@ -44,4 +44,4 @@ services:
     restart: unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=system-vps"
+      - "org.label-schema.group=vps-system"
