@@ -7,7 +7,7 @@ services:
   watchtower:
     container_name: watchtower-vps
     image: containrrr/watchtower:latest
-    restart: unless-stopped
+    restart: always
     environment:
       - TZ=Europe/Paris
       - WATCHTOWER_SCHEDULE= 0 0 0 * * *
@@ -41,7 +41,7 @@ services:
       - SSHUSER=${SSHUSER}
     ports:
       - 3000:3000
-    restart: unless-stopped
+    restart: always
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=vps-system"
