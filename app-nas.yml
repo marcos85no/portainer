@@ -23,7 +23,7 @@ services:
       - 51413:51413/udp
     networks:
       - net
-    restart: unless-stopped
+    restart: always
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=nas-app"
@@ -31,7 +31,7 @@ services:
   resilio:
     container_name: resilio-nas
     image: lscr.io/linuxserver/resilio-sync:latest
-    restart: unless-stopped
+    restart: always
     environment:
       - PUID=1000
       - PGID=1000
@@ -52,7 +52,7 @@ services:
   vaultwarden:
     container_name: vaultwarden-nas
     image: vaultwarden/server:latest
-    restart: unless-stopped
+    restart: always
     volumes:
       - "/docker/app-nas/vaultwarden:/data/"
     ports:
@@ -68,7 +68,7 @@ services:
     container_name: firefox-nas
     ports:
       - "5800:5800"
-    restart: unless-stopped
+    restart: always
     networks:
       - net
     volumes:
