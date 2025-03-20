@@ -17,7 +17,7 @@ services:
       - "/docker/app-system/filebrowser/config/:/config"
     environment:
       - "FB_BASEURL=/filebrowser"
-    restart: unless-stopped
+    restart: always
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=nas-system"
@@ -25,7 +25,7 @@ services:
   watchtower:
     container_name: watchtower-nas
     image: containrrr/watchtower:latest
-    restart: unless-stopped
+    restart: always
     environment:
       - TZ=Europe/Paris
       - WATCHTOWER_SCHEDULE= 0 0 0 * * *
@@ -59,7 +59,7 @@ services:
       - /docker/app-system/organizr/config/organizr:/config
     ports:
     - 72:80
-    restart: unless-stopped
+    restart: always
     networks:
       - net
     labels:
@@ -73,7 +73,7 @@ services:
       - /docker/app-system/kuma:/app/data
     ports:
     - 3001:3001
-    restart: unless-stopped
+    restart: always
     networks:
       - net
     labels:
@@ -90,7 +90,7 @@ services:
       - SSHUSER=${SSHUSER}
     ports:
       - 3000:3000
-    restart: unless-stopped
+    restart: always
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=nas-system"
