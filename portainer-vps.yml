@@ -2,7 +2,7 @@ services:
   portainer:
     container_name: portainer-vps
     image: portainer/portainer-ce:latest
-    restart: unless-stopped
+    restart: always
     volumes:
       - "/docker/portainer:/data"
       - "/var/run/docker.sock:/var/run/docker.sock"
