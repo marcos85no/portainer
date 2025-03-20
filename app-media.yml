@@ -32,7 +32,7 @@ services:
     volumes:
       - /docker/app-media/jellyfin/config:/config
       - /docker/app-media/jellyfin/cache:/cache
-#      - /ZFS/tv:/media
+      - /ZFS/tv:/media
     ports:
       - 8096:8096
       - 8920:8920
