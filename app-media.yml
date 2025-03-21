@@ -29,6 +29,8 @@ services:
       - PGID=1000
       - TZ=Europe/Paris
       - JELLYFIN_PublishedServerUrl=https://tv.pariteau.fr
+    devices:
+      - /dev/dri:/dev/dri
     volumes:
       - /docker/app-media/jellyfin/config:/config
       - /docker/app-media/jellyfin/cache:/cache
