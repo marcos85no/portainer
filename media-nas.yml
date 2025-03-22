@@ -13,13 +13,14 @@ services:
       - net
     restart: always
     environment:
+      - TZ=Europe/Paris
       - ND_SCANSCHEDULE=24h
     volumes:
       - "/docker/app-media/navidrome/data:/data"
       - "/ZFS/musiques/navidrome:/music"
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app-media"
+      - "org.label-schema.group=media-nas"
 
   jellyfin:
     image: ghcr.io/linuxserver/jellyfin:latest
@@ -44,4 +45,4 @@ services:
     restart: always
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=app-media"
+      - "org.label-schema.group=media-nas"
