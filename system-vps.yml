@@ -10,7 +10,7 @@ services:
     restart: always
     environment:
       - TZ=Europe/Paris
-      - WATCHTOWER_SCHEDULE= 0 0 0 * * *
+      - WATCHTOWER_SCHEDULE= 0 2 * * 1
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_REMOVE_VOLUMES=true
       - WATCHTOWER_LOG_LEVEL=info
@@ -36,6 +36,7 @@ services:
     networks:
       - net
     environment:
+      - TZ=Europe/Paris
       - SSHHOST=51.254.102.122
       - SSHPORT=${SSHPORT}
       - SSHUSER=${SSHUSER}
