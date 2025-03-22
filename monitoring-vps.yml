@@ -22,7 +22,7 @@ services:
     networks:
       - net
     labels:
-      - "org.label-schema.group=vps-monitoring"
+      - "org.label-schema.group=monitoring-vps"
       - "com.centurylinklabs.watchtower.enable=true"
 
   cadvisor:
@@ -39,5 +39,5 @@ services:
     networks:
       - net
     labels:
-      - "org.label-schema.group=vps-monitoring"
+      - "org.label-schema.group=monitoring-vps"
       - "com.centurylinklabs.watchtower.enable=true"
