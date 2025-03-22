@@ -29,7 +29,7 @@ services:
     restart: always
     environment:
       - TZ=Europe/Paris
-      - WATCHTOWER_SCHEDULE= 0 0 0 * * *
+      - WATCHTOWER_SCHEDULE= 0 1 * * 2
       - WATCHTOWER_CLEANUP=true
       - WATCHTOWER_REMOVE_VOLUMES=true
       - WATCHTOWER_LOG_LEVEL=info
