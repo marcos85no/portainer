@@ -11,6 +11,7 @@ services:
     ports:
       - 4000:80
     environment:
+      - TZ=Europe/Paris
       - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
       - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
       - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
@@ -20,13 +21,14 @@ services:
       - net
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=vps-wordpress"
+      - "org.label-schema.group=wordpress-vps"
 
   db:
     container_name: wordpress-db-vps
     image: mysql:8.0
     restart: always
     environment:
+      - TZ=Europe/Paris
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
@@ -37,4 +39,4 @@ services:
       - net
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=vps-wordpress"
+      - "org.label-schema.group=wordpress-vps"
