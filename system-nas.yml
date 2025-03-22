@@ -17,10 +17,11 @@ services:
       - "/docker/app-system/filebrowser/config/:/config"
     environment:
       - "FB_BASEURL=/filebrowser"
+      - TZ=Europe/Paris
     restart: always
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=nas-system"
+      - "org.label-schema.group=system-nas"
 
   watchtower:
     container_name: watchtower-nas
@@ -46,7 +47,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     labels:
-      - "org.label-schema.group=nas-system"
+      - "org.label-schema.group=system-nas"
 
   organizr:
     image: organizr/organizr:latest
@@ -64,7 +65,7 @@ services:
       - net
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=nas-system"
+      - "org.label-schema.group=system-nas"
 
   kuma:
     image: louislam/uptime-kuma:1
@@ -74,10 +75,12 @@ services:
     ports:
     - 3001:3001
     restart: always
+    environment:
+      - TZ=Europe/Paris
     networks:
       - net
     labels:
-      - "org.label-schema.group=nas-system"
+      - "org.label-schema.group=system-nas"
 
   wetty:
     image: wettyoss/wetty:latest
@@ -85,6 +88,7 @@ services:
     networks:
       - net
     environment:
+      - TZ=Europe/Paris
       - SSHHOST=192.168.0.12
       - SSHPORT=${SSHPORT}
       - SSHUSER=${SSHUSER}
@@ -93,4 +97,4 @@ services:
     restart: always
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=nas-system"
+      - "org.label-schema.group=system-nas"
