@@ -53,6 +53,7 @@ services:
     restart: always
     environment:
       - TZ=Europe/Paris
+      - ADMIN_TOKEN=password
     volumes:
       - "/docker/app-nas/vaultwarden:/data/"
     ports:
