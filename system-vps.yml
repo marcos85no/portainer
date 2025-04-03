@@ -46,3 +46,19 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=system-vps"
+
+  vaultwarden:
+    container_name: vaultwarden-vps
+    image: vaultwarden/server:latest
+    restart: always
+    environment:
+      - TZ=Europe/Paris
+    volumes:
+      - "/docker/app-nas/vaultwarden:/data/"
+    ports:
+      - 5000:80
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=system-vps"
