@@ -30,30 +30,13 @@ services:
     labels:
       - "org.label-schema.group=system-vps"
 
-  wetty:
-    image: wettyoss/wetty:latest
-    container_name: wetty-vps
-    networks:
-      - net
-    environment:
-      - TZ=Europe/Paris
-      - SSHHOST=51.254.102.122
-      - SSHPORT=${SSHPORT}
-      - SSHUSER=${SSHUSER}
-    ports:
-      - 5000:3000
-    restart: always
-    labels:
-      - "com.centurylinklabs.watchtower.enable=true"
-      - "org.label-schema.group=system-vps"
-
   vaultwarden:
     container_name: vaultwarden-vps
     image: vaultwarden/server:latest
     restart: always
     environment:
       - TZ=Europe/Paris
-      - ADMIN_TOKEN=password
+      - ADMIN_TOKEN=${ADMIN_TOKEN}
     volumes:
       - "/docker/app-nas/vaultwarden:/data/"
     ports:
