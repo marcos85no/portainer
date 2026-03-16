@@ -1,0 +1,41 @@
+networks:
+  net:
+    driver: bridge
+
+services:
+
+  wordpress:
+    container_name: wordpress-vps-test
+    image: wordpress:latest
+    restart: always
+    ports:
+      - 4000:80
+    environment:
+      - TZ=Europe/Paris
+      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+    volumes:
+      - /docker/wordpress/wordpress:/var/www/html
+    networks:
+      - net
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "org.label-schema.group=wordpress-vps"
+
+  db:
+    container_name: wordpress-db-vps-test
+    image: mysql:8.0
+    restart: always
+    environment:
+      - TZ=Europe/Paris
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - /docker/wordpress/mysql:/var/lib/mysql
+    networks:
+      - net
+    labels:
+      - "org.label-schema.group=wordpress-vps"
