@@ -26,6 +26,7 @@ services:
   db:
     container_name: wordpress-db-vps-test
     image: mysql:8.0
+    command: --skip-grant-tables --skip-networking
     restart: always
     environment:
       - TZ=Europe/Paris
