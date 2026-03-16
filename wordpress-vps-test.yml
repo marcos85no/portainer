@@ -16,7 +16,7 @@ services:
       - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
       - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
     volumes:
-      - /docker/wordpress/wordpress:/var/www/html
+      - /docker/wordpress-test/wordpress:/var/www/html
     networks:
       - net
     labels:
@@ -34,7 +34,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
-      - /docker/wordpress/mysql:/var/lib/mysql
+      - /docker/wordpress-test/mysql:/var/lib/mysql
     networks:
       - net
     labels:
