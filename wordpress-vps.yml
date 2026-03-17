@@ -43,6 +43,7 @@ services:
       - --max-connections=20                # Peu de connexions nécessaires en dev
       - --skip-log-bin                      # Économise CPU et disque
       - --default-authentication-plugin=mysql_native_password
+      - --performance-schema=OFF       # ÉCONOMISE ~100 Mo de RAM par instance MySQL
     environment:
       - TZ=Europe/Paris
       - MYSQL_DATABASE=${MYSQL_DATABASE}
