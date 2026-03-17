@@ -4,8 +4,8 @@ networks:
 
 services:
 
-  wp-vps-dev:
-    container_name: wp-vps-dev
+  wordpress-dev:
+    container_name: wordpress-dev-vps
     image: wordpress:latest
     restart: always
     ports:
@@ -16,15 +16,15 @@ services:
       - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
       - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
     volumes:
-      - /docker/wp-dev/wp:/var/www/html
+      - /docker/wordpress-dev/wordpress:/var/www/html
     networks:
       - net
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
       - "org.label-schema.group=wordpress-vps"
 
-  wp-db-vps-dev:
-    container_name: wp-db-vps-dev
+  db-dev:
+    container_name: wordpress-db-vps-dev
     image: mysql:8.0
     restart: always
     environment:
@@ -33,9 +33,8 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-    command: --innodb-buffer-pool-size=256M --innodb-log-buffer-size=16M
     volumes:
-      - /docker/wp-dev/mysql:/var/lib/mysql
+      - /docker/wordpress-dev/mysql:/var/lib/mysql
     networks:
       - net
     labels:
