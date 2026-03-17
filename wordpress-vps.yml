@@ -8,6 +8,10 @@ services:
     container_name: wordpress-vps
     image: wordpress:latest
     restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 400M
     ports:
       - 4000:80
     environment:
@@ -27,6 +31,18 @@ services:
     container_name: wordpress-db-vps
     image: mysql:8.0
     restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 512M 
+        reservations:
+          memory: 256M
+    command: 
+      - --innodb-buffer-pool-size=128M      # Très bas pour le dev
+      - --innodb-log-buffer-size=8M
+      - --max-connections=20                # Peu de connexions nécessaires en dev
+      - --skip-log-bin                      # Économise CPU et disque
+      - --default-authentication-plugin=mysql_native_password
     environment:
       - TZ=Europe/Paris
       - MYSQL_DATABASE=${MYSQL_DATABASE}
