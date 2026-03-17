@@ -33,6 +33,7 @@ services:
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    command: --innodb-buffer-pool-size=256M --innodb-log-buffer-size=16M
     volumes:
       - /docker/wordpress-dev/mysql:/var/lib/mysql
     networks:
