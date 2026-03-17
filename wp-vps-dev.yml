@@ -35,7 +35,7 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     command: --innodb-buffer-pool-size=256M --innodb-log-buffer-size=16M
     volumes:
-      - /docker/wp/mysql:/var/lib/mysql
+      - /docker/wp-dev/mysql:/var/lib/mysql
     networks:
       - net
     labels:
